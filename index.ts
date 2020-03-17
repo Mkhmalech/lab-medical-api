@@ -1,2 +1,2 @@
-export * from './labTests'
-export * from './labos'
+export * from './src/labTests'
+export * from './src/labos'

@@ -1,19 +1,12 @@
 {
-  "name": "lab-medical-api",
+  "name": "lab-ittyni-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index",
+  "types": "lab.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mkhmalech/lab-medical-api.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Mkhmalech/lab-medical-api/issues"
-  },
-  "homepage": "https://github.com/Mkhmalech/lab-medical-api#readme"
+  "author": "{name : \"khm@med\", email : \"m.khmalech@gmail.com\"}",
+  "license": "ISC"
 }
