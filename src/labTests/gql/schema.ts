@@ -18,6 +18,14 @@ export const LabTestsSchema = buildSchema(`
         Bcode : Int
     }
 
+    type Specimen {
+        nature : [String]
+        tubeColor : [String]
+        anticoagulant : [String]
+        numberoftube : Int
+        volumemin : Int
+    }
+
     type EnTest {
         id: ID
         name : Names
@@ -30,6 +38,7 @@ export const LabTestsSchema = buildSchema(`
         name : Names
         reference : Reference
         finance : [Finance]
+        specimen : Specimen
     }
 
     input LabTestsNames { 
@@ -72,6 +81,8 @@ export const LabTestsSchema = buildSchema(`
         LabTestFrenchSearch( query : String) : [FrTest]
         LabTestFrenchById (id : String ) : FrTest
         LabTestFrenchByIds (ids : [String] ) : [FrTest]
+
+        nameEnFilter (en : String ) : [FrTest]
     }
 
     type LabTestsMutation {

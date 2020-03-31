@@ -58,7 +58,8 @@ export class LabTests {
           Bcode: test.finance[0] ? test.finance[0].Bcode : null,
           country: test.finance[0] ? test.finance[0].country : null
         }
-      ]
+      ],
+      specimen : {...test.specimen}
     };
   };
   namesUpdate = async ({ names, user }: any) => {
@@ -231,7 +232,7 @@ export class LabTests {
 
       test.specimen = {
           nature : preAnalytics.sampleType,
-          tubeColor : preAnalytics.sampleCollectorColor,
+          tubecolor : preAnalytics.sampleCollectorColor,
           numberoftube : preAnalytics.SampleCollectorQuantity,
           volumemin : preAnalytics.sampleVolumeMin    
       }
@@ -321,5 +322,17 @@ export class LabTests {
     
 
     return testFetchedByIds;
+  }
+  nameEnFilter = async ({ en }: any) => {
+    let q = en;
+    q = new RegExp(q, 'ig');
+
+    const res = await TESTS.find({$or : [{"name.en" : q}, {"reference.Mnemonic" : q}]});
+
+    let result : any[] = [];
+
+    res.map(test=>result.push(test));
+
+    return([...result])
   }
 }

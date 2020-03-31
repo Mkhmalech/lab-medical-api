@@ -16,7 +16,8 @@ export const LabTestsResolver = {
     LabTestSpecimenUpdate : labTests.specimenUpdate,
     LabTestAllUpdate : labTests.updateAll,
     LabTestFrenchById : labTests.LabTestFrenchById,
-    LabTestFrenchByIds : labTests.LabTestFrenchByIds
+    LabTestFrenchByIds : labTests.LabTestFrenchByIds,
+    nameEnFilter : labTests.nameEnFilter
     
 
 }

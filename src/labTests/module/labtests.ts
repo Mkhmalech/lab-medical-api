@@ -7,24 +7,24 @@ interface Reference {
 }
 
 interface Names {
-  en: String;
-  fr?: String;
+  en: string;
+  fr?: string;
 }
 
 interface Finance {
-  country: String;
+  country: string;
   Bcode: Number;
 }
 
 interface Classification {
-  Panels?: String;
-  LabDepartement: String;
-  Molecule: String;
+  Panels?: string;
+  LabDepartement: string;
+  Molecule: string;
 }
 
 interface Specimen {
   nature?: String[];
-  tubeColor?: String[];
+  tubecolor?: String[];
   anticoagulant?: String[];
   numberoftube?: Number;
   volumemin?: Number;
@@ -85,5 +85,6 @@ const TestSchema: Schema = new Schema({
 
   updates: []
 });
+
 
 export const TESTS = model<ITestModel>("TESTS", TestSchema);
