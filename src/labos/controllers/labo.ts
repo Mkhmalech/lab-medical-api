@@ -5,7 +5,8 @@ import { Db } from "../../../../db-ittyni-api/src/db";
 import jwt from "jsonwebtoken";
 
 export class Labo {
-  private Labo = new Db(LABO);
+  
+  protected Labo = new Db(LABO);
 
   // private LaboName ? : LabLaboAccountName;
 

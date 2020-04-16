@@ -1,4 +1,7 @@
+import Staff from '../controllers/staff';
+
+
 export const staffResolver = {
-    employerListAll : ()=>"test",
-    employerAddNew : ({name} : any ) => "test"
+    employerListAll : Staff.employerListAll,
+    employerAddNew : Staff.employerAddNew
 }

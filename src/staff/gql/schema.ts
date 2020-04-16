@@ -2,21 +2,40 @@ import { buildSchema } from 'graphql';
 
 const Employer = `
     type Employer {
-        name
+        addedBy  : ID
+        civility : String
+        firstName : String
+        lastName : String
+        ppr : Int 
+        departement : [String]
+    }
+`
+const inputEmployer = `
+    input EmployerInput {
+        civility : String
+        addedBy  : ID!
+        firstName : String
+        lastName : String
+        ppr : Int
+        departementId : String
     }
 `
 
 const StaffQuery = `
     type StaffQuery {
-        employerListAll : String
+        employerListAll : [Employer]
     }
 `
 const StaffMutation = `
     type StaffMutation {
-        employerAddNew(name : String) : String
+        employerAddNew(employer : EmployerInput) : String
     }
 `
 export const staffSchema = buildSchema(`
+
+    ${Employer} 
+
+    ${inputEmployer} 
 
     ${StaffQuery}
 
