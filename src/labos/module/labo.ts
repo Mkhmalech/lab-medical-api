@@ -1,4 +1,5 @@
 import { Schema, model, Document} from 'mongoose';
+import { LaboStaff } from '../../staff/module/staff';
 
 type LaboModel = ILabo & Document;
 
@@ -74,8 +75,21 @@ const LaboSchema = new Schema({
 
     affiliate : {
 
-    }
+    },
+    /** 
+     * laboratoire staff that hold all 
+     * about labo staff
+    */
+    staff : [LaboStaff],
 
+    /**
+     * if manager create account 
+     * for an employer we will move
+     * employer data to user collection
+     * and move labo activities to subcollection
+     * like shfits parameters and others 
+     */
+    shift : {},
   });
 
   export const LABO = model<LaboModel>("LABO", LaboSchema)

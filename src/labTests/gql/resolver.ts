@@ -8,6 +8,7 @@ export const LabTestsResolver = {
     AllLabTests_en: labTests.listAllTests,
     AllLabTests_fr: labTests.listAllTestsFr,
     LabTestView_en: labTests.LabTestView,
+    LabTestView_fr: labTests.LabTestFrView,
     LabTestFrenchSearch: labTests.LabTestsFrFilterByNameAndMnemonic,
     LabTestNamesUpdate : labTests.namesUpdate,
     LabTestReferenceUpdate : labTests.referenceUpdate,

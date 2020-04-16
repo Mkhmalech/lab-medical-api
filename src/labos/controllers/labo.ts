@@ -13,8 +13,20 @@ export class Labo {
     // this.Labo.getAllFields();
     // this.insertManyLabosIntoDb(Laboss);
   }
+  
+  // Labo Info
+  LaboListAll = ()=>{
+    const labos : any = this.Labo.getAllFields();
+    return labos;
+  }
 
-  //Catalog
+  // labo details
+  getLaboByName = ({name} : any) => {
+    const labo = this.Labo.getOneByQuery({"account.name" : name});
+    return labo;
+  }
+
+  // Labo Catalog
   catalogTests = ({ catalogUpdate }: any) => {
     // 2 - very token of current user
     const userUpdateCatalog = jwt.verify(

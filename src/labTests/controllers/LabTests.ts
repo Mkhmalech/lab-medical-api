@@ -62,6 +62,26 @@ export class LabTests {
       specimen : {...test.specimen}
     };
   };
+  LabTestFrView = async ({ name }: any) => {
+    const test = await TESTS.findOne({ "name.fr": name });
+    if (!test) throw new Error("no test found");
+
+    return {
+      id: test._id.toString(),
+      name: {
+        en: test.name.en,
+        fr: test.name.fr
+      },
+      reference: { ...test.reference },
+      finance: [
+        {
+          Bcode: test.finance[0] ? test.finance[0].Bcode : null,
+          country: test.finance[0] ? test.finance[0].country : null
+        }
+      ],
+      specimen : {...test.specimen}
+    };
+  };
   namesUpdate = async ({ names, user }: any) => {
     let updatingMsg: any = await TESTS.findOne({ "name.en": names.en })
       .then(async test => {

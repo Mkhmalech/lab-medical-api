@@ -78,6 +78,7 @@ export const LabTestsSchema = buildSchema(`
         AllLabTests_en : [EnTest]
         AllLabTests_fr : [FrTest]
         LabTestView_en( name : LabTestsNames ) : FrTest
+        LabTestView_fr( name : String ) : FrTest
         LabTestFrenchSearch( query : String) : [FrTest]
         LabTestFrenchById (id : String ) : FrTest
         LabTestFrenchByIds (ids : [String] ) : [FrTest]
