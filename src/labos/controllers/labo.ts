@@ -368,4 +368,42 @@ export class Labo {
       console.error(err.message);
     }
   }
+
+  /**************************
+   ****** Labo Settings *****
+   **************************/
+  departementsListing = () => {
+
+    return[]
+  }
+  holidaysListing = () => {
+
+    return[]
+  }
+  leavesListing = () => {
+
+    return[]
+  }
+  automatesListing = () => {
+
+    return[]
+  }
+
+  // update settings
+  addDepartement = ({holiday} : any) =>{
+
+    return 'success'
+  }
+  addHoliday = ({departement} : any) =>{
+
+    return 'success'
+  }
+  addLeave = ({leave} : any) =>{
+
+    return 'success'
+  }
+  addAutomate = ({automate} : any) =>{
+
+    return 'success'
+  }
 }

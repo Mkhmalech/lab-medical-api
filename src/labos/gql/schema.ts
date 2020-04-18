@@ -1,4 +1,5 @@
 import { buildSchema } from 'graphql';
+import { SettingSchema } from './settingSchema';
 
 const Tele =`
     type Tele {
@@ -41,7 +42,6 @@ const Labo = `
         LaboInfoListAll : [LaboInfo]
     }
 `
-
 const LaboCatalog = `
 
     input ListTest {
@@ -121,8 +121,11 @@ export const LaboSchema = buildSchema(`
 
     ${Labo}
 
+    ${SettingSchema}
+
     type LaboQuery {
         catalog : LaboCatalog
+        setting : LaboSetting
         LaboListAll : [LaboInfo]
         LaboDetails(name : String) : LaboInfo
     }

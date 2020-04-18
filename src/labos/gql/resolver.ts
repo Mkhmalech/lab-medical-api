@@ -11,6 +11,23 @@ export const LaboResolver = {
     findCatalogTests: labo.findCatalogTests,
     addupdateTest: labo.catalogTestUpdateOne    
   },
-  LaboListAll: labo.LaboListAll,
-  LaboDetails     : labo.getLaboByName
+  setting : {
+
+    // list
+    listDepartement : labo.departementsListing,
+    listHoliday : labo.holidaysListing,
+    listLeave : labo.leavesListing,
+    listAutomate : labo.automatesListing,
+
+    // update 
+    addDepartement : labo.addDepartement,
+    addHoliday : labo.addHoliday,
+    addLeave : labo.addLeave,
+    addAutomate : labo.addAutomate,
+
+  },
+
+  LaboListAll : labo.LaboListAll,
+  
+  LaboDetails : labo.getLaboByName
 };
