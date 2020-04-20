@@ -24,6 +24,7 @@ const LaboCatalogSchema = new Schema({
   list: [LaboCatalogListSchema],
 });
 
+
 const LaboSchema = new Schema({
   account: {
     name: {
@@ -31,7 +32,7 @@ const LaboSchema = new Schema({
     },
     code: {
       type: Number,
-    },
+    }
   },
 
   contact: {

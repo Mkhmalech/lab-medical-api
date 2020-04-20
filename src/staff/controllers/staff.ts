@@ -15,14 +15,23 @@ class Staff extends Labo {
         return(res)
     }
 
-    employerAddNew = async ({employer} : any) =>{
-        const res = await this.selectLabo("Centrale du CHU Hassan II", (r)=>{
-            employer.date = new Date().toISOString();
-            r.staff.push(employer);
-            r.save((e: string)=>{if(e) throw new Error(e)})
-            return("success");
-        })
-        return(res)
+    employerAddNew = async (arg : any, {req} : any ) =>{
+
+        const {user} = req, {employer} = arg;
+
+        if(user){
+
+            if(user.role === 'supadmin' || user.role==='director'){
+                const res = await this.selectLabo("Centrale du CHU Hassan II", (r)=>{
+                    employer.date = new Date().toISOString();
+                    r.staff.push(employer);
+                    r.save((e: string)=>{if(e) throw new Error(e)})
+                    return("success");
+                })
+                return(res)
+            }
+
+        }
     }
 }
 
