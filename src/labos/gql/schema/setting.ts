@@ -1,5 +1,5 @@
 const departement = `
-    departement : String
+    name : String
 `
 const holiday = `
     holiday : String
@@ -8,13 +8,12 @@ const holiday = `
 `
 const leave = `
     leave : String
-    from : String
-    to : String
+    duration : Int
 `
 const automate = `
     brand : String
     analyzer : String
-    departementId : String
+    entryDate : String
 `
 const types = `
     type holiday { ${holiday} }
@@ -23,12 +22,24 @@ const types = `
     type automate { ${automate} }
 `
 const inputs = `
-    input Holiday { ${holiday} }
-    input Departement { ${departement} }
-    input Leave { ${leave} }
-    input Automate { ${automate} }
+    input Holiday { 
+        ${holiday} 
+        accountName : String!
+    }
+    input Departement { 
+        ${departement} 
+        accountName : String!
+    }
+    input Leave { 
+        ${leave} 
+        accountName : String! 
+    }
+    input Automate { 
+        ${automate} 
+        accountName : String!
+    }
 `
-export const SettingSchema = `
+export const Setting = `
 
     ${types}
 
@@ -36,10 +47,10 @@ export const SettingSchema = `
 
     type LaboSetting {
 
-        listDepartement : [departement]
-        listHoliday : [holiday]
-        listLeave : [leave]
-        listAutomate : [automate]
+        listDepartement(accountName : String) : [departement]
+        listHoliday(accountName : String) : [holiday]
+        listLeave(accountName : String) : [leave]
+        listAutomate(accountName : String) : [automate]
 
         addHoliday (holiday : Holiday) : String
         addDepartement (departement : Departement) : String

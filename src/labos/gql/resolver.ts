@@ -12,7 +12,6 @@ export const LaboResolver = {
     addupdateTest: labo.catalogTestUpdateOne    
   },
   setting : {
-
     // list
     listDepartement : labo.departementsListing,
     listHoliday : labo.holidaysListing,
@@ -29,5 +28,7 @@ export const LaboResolver = {
 
   LaboListAll : labo.LaboListAll,
   
-  LaboDetails : labo.getLaboByName
+  LaboDetails : labo.getLaboByName,
+  
+  searchLaboByName : labo.searchLaboByName
 };

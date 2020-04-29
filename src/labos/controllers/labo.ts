@@ -5,7 +5,6 @@ import { Db } from "../../../../db-ittyni-api/src/db";
 import jwt from "jsonwebtoken";
 
 export class Labo {
-  
   protected Labo = new Db(LABO);
 
   // private LaboName ? : LabLaboAccountName;
@@ -14,19 +13,31 @@ export class Labo {
     // this.Labo.getAllFields();
     // this.insertManyLabosIntoDb(Laboss);
   }
-  
+
   // Labo Info
-  LaboListAll = ()=>{
-    const labos : any = this.Labo.getAllFields();
+  LaboListAll = () => {
+    const labos: any = this.Labo.getAllFields();
     return labos;
-  }
+  };
 
   // labo details
-  getLaboByName = ({name} : any) => {
-    const labo = this.Labo.getOneByQuery({"account.name" : name});
+  getLaboByName = ({ name }: any) => {
+    const labo = this.Labo.getOneByQuery({ "account.name": name });
     return labo;
-  }
+  };
+  // search labo by ame
+  searchLaboByName = async ({ query }: any) => {
+    let q = query;
+    q = new RegExp(q, "ig");
 
+    const res = await LABO.find({ "account.name": q });
+
+    let result: any[] = [];
+
+    res.map((labo) => result.push(labo.account));
+
+    return [...result];
+  };
   // Labo Catalog
   catalogTests = ({ catalogUpdate }: any) => {
     // 2 - very token of current user
@@ -75,9 +86,9 @@ export class Labo {
                   catalogUpdate.catalogList[i].testReferred === "oui"
                     ? true
                     : false,
-                date: new Date()
-              }
-            ]
+                date: new Date(),
+              },
+            ],
           });
 
           labo.save((e: any) => {
@@ -103,7 +114,7 @@ export class Labo {
               catalogUpdate.catalogList[i].testReferred === "oui"
                 ? true
                 : false,
-            date: new Date()
+            date: new Date(),
           });
 
           // delete labo.catalog.list[testIndex].key;
@@ -152,7 +163,7 @@ export class Labo {
         return {
           testReported: lasIndex.testReported,
           testPrice: lasIndex.testPrice,
-          testReferred: lasIndex.testReferred
+          testReferred: lasIndex.testReferred,
         };
       }
     );
@@ -162,127 +173,103 @@ export class Labo {
     return lastCatalog;
   };
 
-  catalogListTests = async ({listTests} : any )=> {
-    const lastCatalog : any = []
+  catalogListTests = async ({ listTests }: any) => {
+    const lastCatalog: any = [];
     // console.log(listTests)
-    await this.selectLabo(
-      listTests.laboName,
-      (labo: any) => {
-
-        listTests.updates.map(
-          (listTest : any) =>{
-
-            const testIndex = labo.catalog.list.findIndex(
-              (e: any) => e.testID === listTest.testId
-            );
-
-            if (testIndex < 0) {
-              lastCatalog.push({
-                testId : listTest.testId,
-                testName : listTest.testName,
-                Bcode  : listTest.Bcode
-              });
-            }
-            else {
-
-            const testUpdates  = labo.catalog.list[testIndex].update;
-
-            const lasIndex = testUpdates[testUpdates.length - 1];
-
-            lastCatalog.push({
-              testReported: lasIndex.testReported,
-              testPrice: lasIndex.testPrice,
-              testReferred: lasIndex.testReferred,
-              testId : listTest.testId,
-              Bcode  : listTest.Bcode,
-              testName : listTest.testName
-            });
-          }
-        }) 
-      }
-    );
-
-    return lastCatalog;
-  }
-
-  findCatalogTest = async ({labTest} : any) => {
-    let catalogTest : any ;
-    await this.selectLabo(
-      labTest.laboName,
-      (labo : any) => {
-
+    await this.selectLabo(listTests.laboName, (labo: any) => {
+      listTests.updates.map((listTest: any) => {
         const testIndex = labo.catalog.list.findIndex(
-          (e: any) => e.testID === labTest.testId
+          (e: any) => e.testID === listTest.testId
         );
 
         if (testIndex < 0) {
-          
-          catalogTest = {
-            testId : labTest.testId,
-            testName : labTest.testName,
-            Bcode  : labTest.Bcode
-          };
+          lastCatalog.push({
+            testId: listTest.testId,
+            testName: listTest.testName,
+            Bcode: listTest.Bcode,
+          });
+        } else {
+          const testUpdates = labo.catalog.list[testIndex].update;
+
+          const lasIndex = testUpdates[testUpdates.length - 1];
+
+          lastCatalog.push({
+            testReported: lasIndex.testReported,
+            testPrice: lasIndex.testPrice,
+            testReferred: lasIndex.testReferred,
+            testId: listTest.testId,
+            Bcode: listTest.Bcode,
+            testName: listTest.testName,
+          });
         }
-        else {
+      });
+    });
 
-          const testUpdates  = labo.catalog.list[testIndex].update;
+    return lastCatalog;
+  };
 
-            const lasIndex = testUpdates[testUpdates.length - 1];
+  findCatalogTest = async ({ labTest }: any) => {
+    let catalogTest: any;
+    await this.selectLabo(labTest.laboName, (labo: any) => {
+      const testIndex = labo.catalog.list.findIndex(
+        (e: any) => e.testID === labTest.testId
+      );
 
-            catalogTest = {
-              testReported: lasIndex.testReported,
-              testPrice: lasIndex.testPrice,
-              testReferred: lasIndex.testReferred,
-              testId : labTest.testId,
-              Bcode  : labTest.Bcode,
-              testName : labTest.testName
-            };
+      if (testIndex < 0) {
+        catalogTest = {
+          testId: labTest.testId,
+          testName: labTest.testName,
+          Bcode: labTest.Bcode,
+        };
+      } else {
+        const testUpdates = labo.catalog.list[testIndex].update;
 
-        }
+        const lasIndex = testUpdates[testUpdates.length - 1];
+
+        catalogTest = {
+          testReported: lasIndex.testReported,
+          testPrice: lasIndex.testPrice,
+          testReferred: lasIndex.testReferred,
+          testId: labTest.testId,
+          Bcode: labTest.Bcode,
+          testName: labTest.testName,
+        };
       }
-    )
+    });
 
-    return {...catalogTest};
-  }
+    return { ...catalogTest };
+  };
 
-  findCatalogTests = async ({laboName} : any) => {
-    let CatalogTests : any[] = [] ;
+  findCatalogTests = async ({ laboName }: any) => {
+    let CatalogTests: any[] = [];
 
-    await this.selectLabo(
-      laboName, 
-      (labo : any) =>{
-        labo.catalog.list.map((test : any)=>{
+    await this.selectLabo(laboName, (labo: any) => {
+      labo.catalog.list.map((test: any) => {
+        let lastIndex = test.update.length - 1;
+        CatalogTests.push({
+          testReported: test.update[lastIndex].testReported,
+          testPrice: test.update[lastIndex].testPrice,
+          testReferred:
+            test.update[lastIndex].testReferred === "true" ? "oui" : "non",
+          testId: test.testID,
+        });
+      });
+    });
 
-          let lastIndex = test.update.length - 1;
-          CatalogTests.push({
-            testReported : test.update[lastIndex].testReported,
-            testPrice : test.update[lastIndex].testPrice,
-            testReferred : test.update[lastIndex].testReferred === 'true' ? "oui" : "non",
-            testId : test.testID
-          })
-        })
-      }
-    )
+    return CatalogTests;
+  };
 
-    return CatalogTests
-  }
+  catalogTestUpdateOne = ({ addUpdate }: any) => {
+    let isSaved: boolean = false;
 
-  catalogTestUpdateOne = ({addUpdate}: any) => {
-
-    let isSaved : boolean = false;
-
-    const {laboName, catalogList, token} = addUpdate;
+    const { laboName, catalogList, token } = addUpdate;
 
     // Check user ID
-    const userUpdateCatalog = jwt.verify(
-      token,
-      "mysuperTokenlogin"
-    );
+    const userUpdateCatalog = jwt.verify(token, "mysuperTokenlogin");
 
     this.selectLabo(laboName, async (labo: any) => {
-
       // get user ID
-        const { userId }: any = userUpdateCatalog;
+      const { userId }: any = userUpdateCatalog;
 
       // 1- check if test is exist ? update : create new one
       const testIndex = labo.catalog.list.findIndex(
@@ -290,52 +277,44 @@ export class Labo {
       );
 
       // 2- test not exist add to catalog list
-      if(testIndex <= 0) {
+      if (testIndex <= 0) {
         labo.catalog.list.push({
-          testID : catalogList.testId,
-          update : [{
-            userID : userId,
-            testReported : catalogList.testReported,
-            testPrice : catalogList.testPrice,
-            testReferred:
-              catalogList.testReferred === "oui"
-                    ? true
-                    : false,
-              date: new Date()
-          }]
-        })
+          testID: catalogList.testId,
+          update: [
+            {
+              userID: userId,
+              testReported: catalogList.testReported,
+              testPrice: catalogList.testPrice,
+              testReferred: catalogList.testReferred === "oui" ? true : false,
+              date: new Date(),
+            },
+          ],
+        });
 
         labo.save((e: any, r: any) => {
           if (e) throw new Error(e);
           isSaved = true;
         });
-
-
       } else {
-      // 3- test exist update it 
+        // 3- test exist update it
 
-      labo.catalog.list[testIndex].update.push({
-        userID: userId,
-        testReported: catalogList.testReported,
-        testPrice: catalogList.testPrice,
-        testReferred:
-          catalogList.testReferred === "oui"
-            ? true
-            : false,
-        date: new Date()
-      });
+        labo.catalog.list[testIndex].update.push({
+          userID: userId,
+          testReported: catalogList.testReported,
+          testPrice: catalogList.testPrice,
+          testReferred: catalogList.testReferred === "oui" ? true : false,
+          date: new Date(),
+        });
 
-      labo.save((e: any, r: any) => {
-        if (e) throw new Error(e);
-        isSaved = true;
-      });
-
+        labo.save((e: any, r: any) => {
+          if (e) throw new Error(e);
+          isSaved = true;
+        });
       }
-    })
+    });
 
     return isSaved;
-
-  }
+  };
 
   async insertManyLabosIntoDb(labos: any[]) {
     try {
@@ -372,38 +351,166 @@ export class Labo {
   /**************************
    ****** Labo Settings *****
    **************************/
-  departementsListing = () => {
-
-    return[]
-  }
-  holidaysListing = () => {
-
-    return[]
-  }
-  leavesListing = () => {
-
-    return[]
-  }
-  automatesListing = () => {
-
-    return[]
-  }
+  departementsListing = async (args: any, req: any) => {
+    // get account name from args
+    const {accountName} = args
+    const setting : any = await this.findSetting(accountName, req);
+    if(typeof setting=== "string"){
+      return[{name : setting}]
+    } else {
+      return setting.departements
+    }
+  };
+  holidaysListing = async (args: any, req: any) => {
+    // get account name from args
+    const {accountName} = args
+    const setting : any = await this.findSetting(accountName, req);
+    if(typeof setting=== "string"){
+      return[{name : setting}]
+    } else {
+      return setting.holidays
+    }
+  };
+  leavesListing = async (args: any, req: any) => {
+    // get account name from args
+    const {accountName} = args
+    const setting : any = await this.findSetting(accountName, req);
+    if(typeof setting=== "string"){
+      return[{name : setting}]
+    } else {
+      return setting.leaves
+    }
+  };
+  automatesListing = async (args: any, req: any) => {
+    // get account name from args
+    const {accountName} = args
+    const setting : any = await this.findSetting(accountName, req);
+    if(typeof setting=== "string"){
+      return[{name : setting}]
+    } else {
+      return setting.automates
+    }
+  };
 
   // update settings
-  addDepartement = ({holiday} : any) =>{
+  addDepartement = async (args: any, req: any) => {
+    const { departement } = args;
+    try {
+      const res = await this.addSetting(
+        departement.accountName,
+        req,
+        (r) => {
+          r.setting.departements.push({name : departement.name, date : new Date().toString()})
+          r.save();
+        }
+      );
+      if(typeof res === "string"){
+        return res
+      } else {
+        return "success"
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  addHoliday = async (args: any, req : any) => {
+    const { holiday } = args;
+    try {
+      const res = await this.addSetting(
+        holiday.accountName,
+        req,
+        (r) => {
+          r.setting.holidays.push({name : holiday.name, date : new Date().toString()})
+          r.save();
+        }
+      );
+      if(typeof res === "string"){
+        return res
+      } else {
+        return "success"
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  addLeave = async (args: any, req : any)=> {
+    const { leave } = args;
+    try {
+      const res = await this.addSetting(
+        leave.accountName,
+        req,
+        (r) => {
+          r.setting.leaves.push({name : leave.name, date : new Date().toString()})
+          r.save();
+        }
+      );
+      if(typeof res === "string"){
+        return res
+      } else {
+        return "success"
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  addAutomate = async (args: any, req : any)=> {
+    const { automate } = args;
+    try {
+      const res = await this.addSetting(
+        automate.accountName,
+        req,
+        (r) => {
+          r.setting.automates.push({name : automate.name, date : new Date().toString()})
+          r.save();
+        }
+      );
+      if(typeof res === "string"){
+        return res
+      } else {
+        return "success"
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-    return 'success'
-  }
-  addHoliday = ({departement} : any) =>{
+  // handle add setting
+  addSetting = (
+    accountName: string,
+    { user, message, hasAuthorization }: any,
+    cb: (r: any) => any
+  ) => {
+    if (message) {
+      return message;
+    } else {
+      if (hasAuthorization(user, accountName)) {
+        LABO.findOne({"account.name" : accountName}, (e, r)=>{
+          if(e) throw new Error(e)
+          if(!r) throw new Error("account_not_founded")
+          cb(r)              
+        })
+      } else {
+        return "not_allowed";
+      }
+    }
+  };
 
-    return 'success'
-  }
-  addLeave = ({leave} : any) =>{
-
-    return 'success'
-  }
-  addAutomate = ({automate} : any) =>{
-
-    return 'success'
+  // show labo setting by director
+  findSetting = async (accountName : string, { user, message, hasAuthorization }: any,) =>{
+    if (message) {
+      return message;
+    } else {
+      if (hasAuthorization(user, accountName)) {
+        const res = await LABO.findOne({"account.name" : accountName});
+        if(res){
+          return res.setting
+        } else {
+          return "not_founded"
+        }
+      } else {
+        return "not_allowed";
+      }
+    }
+    
   }
 }

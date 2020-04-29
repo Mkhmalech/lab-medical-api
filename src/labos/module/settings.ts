@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 /**
  * labo departement hold all 
  */
-export const departement = new Schema({  departement : String })
+export const departement = new Schema({  name : String, date : String })
 
 /**
  * holiday when labo doesn't work
