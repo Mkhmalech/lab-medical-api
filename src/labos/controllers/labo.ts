@@ -414,13 +414,13 @@ export class Labo {
     }
   };
   addHoliday = async (args: any, req : any) => {
-    const { holiday } = args;
+    const { holiday : {holiday, from, to, accountName} } = args;
     try {
       const res = await this.addSetting(
-        holiday.accountName,
+        accountName,
         req,
         (r) => {
-          r.setting.holidays.push({name : holiday.name, date : new Date().toString()})
+          r.setting.holidays.push({holiday : holiday, from : from, to: to, createdAt : new Date().toString()})
           r.save();
         }
       );
@@ -434,13 +434,13 @@ export class Labo {
     }
   };
   addLeave = async (args: any, req : any)=> {
-    const { leave } = args;
+    const { leave : {leave, duration, accountName} } = args;
     try {
       const res = await this.addSetting(
-        leave.accountName,
+        accountName,
         req,
         (r) => {
-          r.setting.leaves.push({name : leave.name, date : new Date().toString()})
+          r.setting.leaves.push({leave : leave,  duration: duration,  createdAt : new Date().toString()})
           r.save();
         }
       );
@@ -454,13 +454,13 @@ export class Labo {
     }
   };
   addAutomate = async (args: any, req : any)=> {
-    const { automate } = args;
+    const { automate: {brand, analyzer, setupDate, accountName} } = args;
     try {
       const res = await this.addSetting(
-        automate.accountName,
+        accountName,
         req,
         (r) => {
-          r.setting.automates.push({name : automate.name, date : new Date().toString()})
+          r.setting.automates.push({brand : brand, analyzer : analyzer, setupDatedate : setupDate, createdAt : new Date().toString()})
           r.save();
         }
       );

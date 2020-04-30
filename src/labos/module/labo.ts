@@ -91,7 +91,7 @@ const LaboSchema = new Schema({
     departements: [settings.departement],
     holidays: [settings.holiday],
     leaves: [settings.leave],
-    Automates: [settings.Automate],
+    automates: [settings.automate],
   },
 });
 
