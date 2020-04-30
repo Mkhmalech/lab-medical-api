@@ -454,13 +454,13 @@ export class Labo {
     }
   };
   addAutomate = async (args: any, req : any)=> {
-    const { automate: {brand, analyzer, setupDate, accountName} } = args;
+    const { automate: {brand, analyzer, entryDate, accountName} } = args;
     try {
       const res = await this.addSetting(
         accountName,
         req,
         (r) => {
-          r.setting.automates.push({brand : brand, analyzer : analyzer, setupDatedate : setupDate, createdAt : new Date().toString()})
+          r.setting.automates.push({brand : brand, analyzer : analyzer, setupDatedate : entryDate, createdAt : new Date().toString()})
           r.save();
         }
       );
