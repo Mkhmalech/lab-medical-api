@@ -1,12 +1,13 @@
 import { Schema } from "mongoose";
 
 export const LaboStaff= new Schema({
-    userID : String,
-    civility : String,
-    addedBy : String,
+    userID : String, // id in user collection
+    civility : String, 
+    addedBy : String, // createdBy
     firstName : String,
     lastName : String,
-    PPR : Number,
-    date : Date
+    ppr : Number, // number of employer
+    departementId : String,
+    createdAt : Date
   })
   

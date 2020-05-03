@@ -20,4 +20,4 @@ export const leave = new Schema({  leave : String, duration : Number, createdAt 
 /**
  * labo automates
  */
-export const automate = new Schema({ brand : String, analyzer : String, setupDate : String, createdAt : String })
+export const automate = new Schema({ brand : String, analyzer : String, entryDate : String, createdAt : String })

@@ -163,4 +163,5 @@ interface ILabo {
     leaves: any[],
     Automates: any[],
   },
+  staff : any[]
 }

@@ -460,7 +460,7 @@ export class Labo {
         accountName,
         req,
         (r) => {
-          r.setting.automates.push({brand : brand, analyzer : analyzer, setupDatedate : entryDate, createdAt : new Date().toString()})
+          r.setting.automates.push({brand : brand, analyzer : analyzer, entryDate : entryDate, createdAt : new Date().toString()})
           r.save();
         }
       );
@@ -511,6 +511,5 @@ export class Labo {
         return "not_allowed";
       }
     }
-    
   }
 }

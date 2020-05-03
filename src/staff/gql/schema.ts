@@ -13,17 +13,17 @@ const Employer = `
 const inputEmployer = `
     input EmployerInput {
         civility : String
-        addedBy  : ID!
         firstName : String
         lastName : String
         ppr : Int
-        departementId : String
+        departementName : String
+        accountName : String
     }
 `
 
 const StaffQuery = `
     type StaffQuery {
-        employerListAll : [Employer]
+        employerListAll(accountName : String) : [Employer]
     }
 `
 const StaffMutation = `

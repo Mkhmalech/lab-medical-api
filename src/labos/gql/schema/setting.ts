@@ -16,10 +16,10 @@ const automate = `
     entryDate : String
 `
 const types = `
-    type holiday { ${holiday} }
-    type departement { ${departement} }
-    type leave { ${leave} }
-    type automate { ${automate} }
+    type holiday { ${holiday} id : ID }
+    type departement { ${departement} id : ID }
+    type leave { ${leave} id : ID }
+    type automate { ${automate} id : ID }
 `
 const inputs = `
     input Holiday { 
