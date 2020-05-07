@@ -39,7 +39,7 @@ class Staff extends Labo {
       if (hasAuthorization(user, accountName)) {
         const res = await LABO.findOne({ "account.name": accountName });
         if (res) {
-          return res.staff;
+          return res;
         } else {
           return "not_founded";
         }
@@ -53,14 +53,28 @@ class Staff extends Labo {
    */
   employerListAll = async (args: any, req: any) => {
     const { accountName } = args;
-    const staff: any = await this.findStaff(accountName, req);
-    if (typeof staff === "string") {
-      return [staff];
+    let staff : any[] = [];
+    const resultat: any = await this.findStaff(accountName, req);
+    if (typeof resultat === "string") {
+      return [resultat];
     } else {
+      
+      resultat.staff.map((personal : any)=>{
+        staff.push({
+          id: personal._id,
+          civility:personal.civility ,
+          firstName:personal.firstName ,
+          lastName:personal.lastName ,
+          ppr:personal.ppr ,
+          departement : resultat.setting.departements.find((e:any)=>e._id = personal.departementId)
+        })
+      });
       return staff;
     }
   };
-
+  /**
+   * add employer
+   */
   employerAddNew = async (args: any, req : any) => {
     const { employer } = args;
     try {
@@ -70,7 +84,7 @@ class Staff extends Labo {
         (r) => {
           employer.addedBy = req.user.userId;
           const dep = r.setting.departements.find((ele:any) => ele.name === employer.departementName);
-          employer.departementId = `${dep._id}`;
+          employer.departementId = dep._id;
           employer.createdAt = new Date().toString();
           if(employer.departementId) {delete employer.departementName; delete employer.accountName;}
           r.staff.push(employer)
@@ -86,6 +100,27 @@ class Staff extends Labo {
       console.log(e);
     }
   };
+  /**
+   * test populate
+   */
+  testPopulate = async () => {
+    const result = await LABO.findOne({'account.name' : "Centrale du CHU Hassan II"});
+    if(result) {
+      let staff : any[] = [];
+      result.staff.map((personal : any)=>{
+        staff.push({
+          id: personal._id,
+          civility:personal.civility ,
+          firstName:personal.firstName ,
+          lastName:personal.lastName ,
+          ppr:personal.ppr ,
+          departement : result.setting.departements.find((e:any)=>e._id = personal.departementId)
+        })
+      });
+
+      console.log(staff)
+    }
+  }
 }
 
 export default new Staff();

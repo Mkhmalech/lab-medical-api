@@ -1,13 +1,21 @@
 import { buildSchema } from 'graphql';
 
+const Departement = `
+    type Departement {
+        name : String
+    }
+`
 const Employer = `
+
+    ${Departement}
+
     type Employer {
         addedBy  : ID
         civility : String
         firstName : String
         lastName : String
         ppr : Int 
-        departement : [String]
+        departement : Departement
     }
 `
 const inputEmployer = `
@@ -24,6 +32,7 @@ const inputEmployer = `
 const StaffQuery = `
     type StaffQuery {
         employerListAll(accountName : String) : [Employer]
+        testPopulate : String
     }
 `
 const StaffMutation = `
