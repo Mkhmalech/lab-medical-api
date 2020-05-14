@@ -8,6 +8,18 @@ export const LaboStaff= new Schema({
     lastName : String,
     ppr : Number, // number of employer
     departementId : {type : Schema.Types.ObjectId, ref : 'LABO'},
-    createdAt : Date
+    createdAt : String
   })
+
+export const LaboShift = new Schema({
+  userID : {type : Schema.Types.ObjectId, ref : 'USER'},
+  addedBy : {type : Schema.Types.ObjectId, ref : 'USER'},
+  employerId : {type : Schema.Types.ObjectId},
+  departementId : {type : Schema.Types.ObjectId},
+  mounth : Number,
+  year : Number,
+  type : String,
+  days : [Number],
+  createdAt : String
+})
   

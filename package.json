@@ -7,6 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "{name : \"khm@med\", email : \"m.khmalech@gmail.com\"}",
+  "author": {
+    "name" : "khm@med", 
+    "email" : "m.khmalech@gmail.com"
+  },
   "license": "ISC"
 }

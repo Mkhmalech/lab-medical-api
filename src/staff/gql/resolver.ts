@@ -4,5 +4,7 @@ import Staff from '../controllers/staff';
 export const staffResolver = {
     employerListAll : Staff.employerListAll,
     employerAddNew : Staff.employerAddNew,
-    testPopulate : Staff.testPopulate
+    findEmployer : Staff.findEmployerByName,
+    assignShiftsToEmployer : Staff.assignShiftsToEmployer,
+    fetchAllShifts : Staff.listShifts
 }

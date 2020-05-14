@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { LaboStaff } from "../../staff/module/staff";
+import { LaboStaff, LaboShift } from '../../staff/module/staff';
 import * as settings from "./settings";
 
 type LaboModel = ILabo & Document;
@@ -81,7 +81,7 @@ const LaboSchema = new Schema({
    * and move labo activities to subcollection
    * like shfits parameters and others
    */
-  shift: {},
+  shifts: [LaboShift],
 
   /**
    * settings of labo holds data of holidays

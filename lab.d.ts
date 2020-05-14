@@ -157,6 +157,7 @@ interface ILabo {
   affiliate: LabLaboAffiliate;
   agreements: LabLaboAgreements;
   certification: LabLaboCertification;
+  shifts : any[],
   setting: {
     departements: any[],
     holidays: any[],
