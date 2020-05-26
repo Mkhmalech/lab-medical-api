@@ -57,7 +57,9 @@ const StaffQuery = `
 const StaffMutation = `
     type StaffMutation {
         employerAddNew(employer : EmployerInput) : String
+        employerDelete(id : ID) : String
         assignShiftsToEmployer(userId : ID, type : String, days : [Int], mounth: Int, year: Int, departementId: ID, accountName : String): String
+        deleteShift(id : ID) : String
     }
 `
 

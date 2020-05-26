@@ -2,6 +2,7 @@ import { Labo } from "../../labos/controllers/labo";
 import { LABO } from "../../labos/module/labo";
 
 class Staff extends Labo {
+  
   constructor() {
     super();
   }
@@ -103,6 +104,26 @@ class Staff extends Labo {
     }
   };
   /**
+   * delete employer
+   */
+  employerDelete = (args : any) => {
+    try {
+      LABO.findOne({"account.name" : "Centrale du CHU Hassan II"}, async (e, r)=>{
+        if(e) throw new Error(e);
+        if(r) {
+          const i = await r.staff.findIndex((s) => s._id == args.id);
+          if(i<0) return "shift_not_founded"
+          r.staff.splice(i, 1);
+          r.save();
+        }
+        return "no_result_founded"
+      });
+      return 'success';
+    } catch(e){
+      throw new Error(e);
+    }
+  }
+  /**
    * test populate
    */
   findEmployerByName = async (args: any, req: any) => {
@@ -173,6 +194,27 @@ class Staff extends Labo {
         });
       });
       return shifts;
+    }
+  };
+
+  /**
+   * delete existing shift
+   */
+  deleteShift = async (args: any) => {
+    try {
+      LABO.findOne({"account.name" : "Centrale du CHU Hassan II"}, async (e, r)=>{
+        if(e) throw new Error(e);
+        if(r) {
+          const i = await r.shifts.findIndex((s) => s._id == args.id);
+          if(i<0) return "shift_not_founded"
+          r.shifts.splice(i, 1);
+          r.save();
+        }
+        return "no_result_founded"
+      });
+      return 'success';
+    } catch(e){
+      throw new Error(e);
     }
   };
 }
