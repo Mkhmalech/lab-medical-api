@@ -88,10 +88,20 @@ const LaboSchema = new Schema({
    * and automates and data used by labo
    */
   setting: {
+    // name of laboratory departements
     departements: [settings.laboSettingDepartement],
+
+    // holidays of labortory
     holidays: [settings.laboSettingHoliday],
+
+    // employed leaves vacance not dispo in this time
     leaves: [settings.laboSettingLeave],
+
+    // what automate the labo has
     automates: [settings.laboSettingAutomate],
+    
+    // status of team that labo has
+    team : [settings.LaboSettingTeam]
   },
 });
 

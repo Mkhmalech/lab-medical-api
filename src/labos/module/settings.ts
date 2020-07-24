@@ -28,7 +28,7 @@ export const LaboSettingAutomate = mongoose.model('labosettingautomate', laboSet
  * labo permission gived to status by component
  */
 export const permissionByComponent = new Schema({ componentName : String, create : Boolean, read : Boolean, update : Boolean, delete : Boolean  })
-export const PermissionByComponent = mongoose.model('labosettingteam', permissionByComponent)
+export const PermissionByComponent = mongoose.model('permissionByComponent', permissionByComponent)
 /**
  * labo Team Status
  */
