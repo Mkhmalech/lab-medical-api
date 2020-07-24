@@ -24,3 +24,13 @@ export const LaboSettingLeave = mongoose.model('labosettingleave', laboSettingLe
  */
 export const laboSettingAutomate = new Schema({ brand : String, analyzer : String, entryDate : String, createdAt : String })
 export const LaboSettingAutomate = mongoose.model('labosettingautomate', laboSettingAutomate)
+/**
+ * labo permission gived to status by component
+ */
+export const permissionByComponent = new Schema({ componentName : String, create : Boolean, read : Boolean, update : Boolean, delete : Boolean  })
+export const PermissionByComponent = mongoose.model('labosettingteam', permissionByComponent)
+/**
+ * labo Team Status
+ */
+export const laboSettingTeam = new Schema({ role : String, permissions : [permissionByComponent] })
+export const LaboSettingTeam = mongoose.model('labosettingteam', laboSettingTeam)
