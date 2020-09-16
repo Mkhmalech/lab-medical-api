@@ -3,8 +3,7 @@ const departement = `
 `
 const holiday = `
     holiday : String
-    from : String
-    to : String
+    duration : Int
 `
 const leave = `
     leave : String

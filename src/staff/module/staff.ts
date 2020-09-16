@@ -1,4 +1,13 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
+
+/**
+ * leave is the personal vacation 
+ */
+export const laboUserConnection = new Schema({
+  connectionAt : String,
+  passwordsatus : String
+})
+export const LaboUserConnection = mongoose.model('labouserconnection', laboUserConnection)
 
 export const LaboStaff= new Schema({
     userID : {type : Schema.Types.ObjectId, ref : 'USER'}, // id in user collection
@@ -6,9 +15,12 @@ export const LaboStaff= new Schema({
     addedBy : {type : Schema.Types.ObjectId, ref : 'USER'}, // createdBy
     firstName : String,
     lastName : String,
+    password : String,
     ppr : Number, // number of employer
     departementId : {type : Schema.Types.ObjectId, ref : 'LABO'},
-    createdAt : String
+    createdAt : String,
+    role : {type : Schema.Types.ObjectId, ref: 'LaboSettingTeam'},
+    connections : [laboUserConnection]
   })
 
 export const LaboShift = new Schema({

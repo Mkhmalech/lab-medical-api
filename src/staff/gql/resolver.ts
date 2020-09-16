@@ -6,6 +6,7 @@ export const staffResolver = {
     employerAddNew : Staff.employerAddNew,
     employerDelete : Staff.employerDelete,
     findEmployer : Staff.findEmployerByName,
+    fetchExistingEmployer : Staff.fetchExistingEmployer,
     assignShiftsToEmployer : Staff.assignShiftsToEmployer,
     fetchAllShifts : Staff.listShifts,
     deleteShift : Staff.deleteShift,

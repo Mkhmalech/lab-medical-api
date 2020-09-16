@@ -10,14 +10,19 @@ const Departement = `
 const Employer = `
 
     ${Departement}
-
+    type Role {
+        role : String
+        _id : ID
+    }
     type Employer {
         id : ID
         addedBy  : ID
         civility : String
         firstName : String
         lastName : String
-        ppr : Int 
+        ppr : Int
+        role : Role 
+        password : String
         departement : Departement
     }
 `
@@ -41,6 +46,8 @@ const inputEmployer = `
         firstName : String
         lastName : String
         ppr : Int
+        password : String
+        role : ID
         departementName : String
         accountName : String
     }
@@ -51,6 +58,7 @@ const StaffQuery = `
         employerListAll(accountName : String) : [Employer]
         findEmployer(query : String) : Employer
         fetchAllShifts(accountName : String) : [Shift]
+        fetchExistingEmployer(employerId : String, accountName : String) : Employer
     }
 `
 

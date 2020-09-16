@@ -163,6 +163,7 @@ interface ILabo {
     holidays: any[],
     leaves: any[],
     Automates: any[],
+    team : any[]
   },
   staff : any[]
 }

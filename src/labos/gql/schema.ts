@@ -1,5 +1,5 @@
 import { buildSchema } from 'graphql';
-import { Setting, LaboCatalog, departement, LaboTeam } from './schema/'
+import { Setting, LaboCatalog, departement, LaboTeam, LaboTeamQuery } from './schema/'
 
 const Tele =`
     type Tele {
@@ -53,11 +53,14 @@ export const LaboSchema = buildSchema(`
 
     ${LaboTeam}
 
+    ${LaboTeamQuery}
+
     type LaboQuery {
         catalog : LaboCatalog
         LaboListAll : [LaboInfo]
         LaboDetails(name : String) : LaboInfo
         searchLaboByName(query : String) : [Account]
+        team : LaboTeamQuery
     }
 
     type laboMutation {

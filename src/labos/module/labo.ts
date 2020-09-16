@@ -101,7 +101,7 @@ const LaboSchema = new Schema({
     automates: [settings.laboSettingAutomate],
     
     // status of team that labo has
-    team : [settings.LaboSettingTeam]
+    team : [settings.laboSettingTeam]
   },
 });
 

@@ -9,26 +9,34 @@ export const LaboResolver = {
     catalogListTests: labo.catalogListTests,
     findCatalogTest: labo.findCatalogTest,
     findCatalogTests: labo.findCatalogTests,
-    addupdateTest: labo.catalogTestUpdateOne    
+    addupdateTest: labo.catalogTestUpdateOne
   },
-  setting : {
+  setting: {
     // list
-    listDepartement : labo.departementsListing,
-    listHoliday : labo.holidaysListing,
-    listLeave : labo.leavesListing,
-    listAutomate : labo.automatesListing,
+    listDepartement: labo.departementsListing,
+    listHoliday: labo.holidaysListing,
+    listLeave: labo.leavesListing,
+    listAutomate: labo.automatesListing,
 
     // update 
-    addDepartement : labo.addDepartement,
-    addHoliday : labo.addHoliday,
-    addLeave : labo.addLeave,
-    addAutomate : labo.addAutomate,
-
+    addDepartement: labo.addDepartement,
+    addHoliday: labo.addHoliday,
+    addLeave: labo.addLeave,
+    addAutomate: labo.addAutomate,
   },
 
-  LaboListAll : labo.LaboListAll,
-  
-  LaboDetails : labo.getLaboByName,
-  
-  searchLaboByName : labo.searchLaboByName
+  team: {
+    addNewRole: labo.addNewRole,
+    updateRole: labo.updateRole,
+    deleteRole: labo.deleteRole,
+    addPermissionToRole: labo.addPermissionToRole,
+    updatePermissionOfRole: labo.updatePermissionOfRole,
+    deletePermissionOfRole: labo.deletePermissionOfRole,
+    fetchAccountRoles : labo.fetchAccountRoles,
+  },
+  LaboListAll: labo.LaboListAll,
+
+  LaboDetails: labo.getLaboByName,
+
+  searchLaboByName: labo.searchLaboByName
 };

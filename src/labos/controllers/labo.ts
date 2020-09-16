@@ -353,40 +353,40 @@ export class Labo {
    **************************/
   departementsListing = async (args: any, req: any) => {
     // get account name from args
-    const {accountName} = args
-    const setting : any = await this.findSetting(accountName, req);
-    if(typeof setting=== "string"){
-      return[{name : setting}]
+    const { accountName } = args
+    const setting: any = await this.findSetting(accountName, req);
+    if (typeof setting === "string") {
+      return [{ name: setting }]
     } else {
       return setting.departements
     }
   };
   holidaysListing = async (args: any, req: any) => {
     // get account name from args
-    const {accountName} = args
-    const setting : any = await this.findSetting(accountName, req);
-    if(typeof setting=== "string"){
-      return[{name : setting}]
+    const { accountName } = args
+    const setting: any = await this.findSetting(accountName, req);
+    if (typeof setting === "string") {
+      return [{ name: setting }]
     } else {
       return setting.holidays
     }
   };
   leavesListing = async (args: any, req: any) => {
     // get account name from args
-    const {accountName} = args
-    const setting : any = await this.findSetting(accountName, req);
-    if(typeof setting=== "string"){
-      return[{name : setting}]
+    const { accountName } = args
+    const setting: any = await this.findSetting(accountName, req);
+    if (typeof setting === "string") {
+      return [{ name: setting }]
     } else {
       return setting.leaves
     }
   };
   automatesListing = async (args: any, req: any) => {
     // get account name from args
-    const {accountName} = args
-    const setting : any = await this.findSetting(accountName, req);
-    if(typeof setting=== "string"){
-      return[{name : setting}]
+    const { accountName } = args
+    const setting: any = await this.findSetting(accountName, req);
+    if (typeof setting === "string") {
+      return [{ name: setting }]
     } else {
       return setting.automates
     }
@@ -400,11 +400,11 @@ export class Labo {
         departement.accountName,
         req,
         (r) => {
-          r.setting.departements.push({name : departement.name, date : new Date().toString()})
+          r.setting.departements.push({ name: departement.name, date: new Date().toString() })
           r.save();
         }
       );
-      if(typeof res === "string"){
+      if (typeof res === "string") {
         return res
       } else {
         return "success"
@@ -413,18 +413,18 @@ export class Labo {
       console.log(e);
     }
   };
-  addHoliday = async (args: any, req : any) => {
-    const { holiday : {holiday, from, to, accountName} } = args;
+  addHoliday = async (args: any, req: any) => {
+    const { holiday: { holiday, duration, accountName } } = args;
     try {
       const res = await this.addSetting(
         accountName,
         req,
         (r) => {
-          r.setting.holidays.push({holiday : holiday, from : from, to: to, createdAt : new Date().toString()})
+          r.setting.holidays.push({ holiday: holiday, duration : duration, createdAt: new Date().toString() })
           r.save();
         }
       );
-      if(typeof res === "string"){
+      if (typeof res === "string") {
         return res
       } else {
         return "success"
@@ -433,18 +433,18 @@ export class Labo {
       console.log(e);
     }
   };
-  addLeave = async (args: any, req : any)=> {
-    const { leave : {leave, duration, accountName} } = args;
+  addLeave = async (args: any, req: any) => {
+    const { leave: { leave, duration, accountName } } = args;
     try {
       const res = await this.addSetting(
         accountName,
         req,
         (r) => {
-          r.setting.leaves.push({leave : leave,  duration: duration,  createdAt : new Date().toString()})
+          r.setting.leaves.push({ leave: leave, duration: duration, createdAt: new Date().toString() })
           r.save();
         }
       );
-      if(typeof res === "string"){
+      if (typeof res === "string") {
         return res
       } else {
         return "success"
@@ -453,18 +453,18 @@ export class Labo {
       console.log(e);
     }
   };
-  addAutomate = async (args: any, req : any)=> {
-    const { automate: {brand, analyzer, entryDate, accountName} } = args;
+  addAutomate = async (args: any, req: any) => {
+    const { automate: { brand, analyzer, entryDate, accountName } } = args;
     try {
       const res = await this.addSetting(
         accountName,
         req,
         (r) => {
-          r.setting.automates.push({brand : brand, analyzer : analyzer, entryDate : entryDate, createdAt : new Date().toString()})
+          r.setting.automates.push({ brand: brand, analyzer: analyzer, entryDate: entryDate, createdAt: new Date().toString() })
           r.save();
         }
       );
-      if(typeof res === "string"){
+      if (typeof res === "string") {
         return res
       } else {
         return "success"
@@ -480,14 +480,14 @@ export class Labo {
     { user, message, hasAuthorization }: any,
     cb: (r: any) => any
   ) => {
-    if (message) {
+    if (message !== "user_success") {
       return message;
     } else {
       if (hasAuthorization(user, accountName)) {
-        LABO.findOne({"account.name" : accountName}, (e, r)=>{
-          if(e) throw new Error(e)
-          if(!r) throw new Error("account_not_founded")
-          cb(r)              
+        LABO.findOne({ "account.name": accountName }, (e, r) => {
+          if (e) throw new Error(e)
+          if (!r) throw new Error("account_not_founded")
+          cb(r)
         })
       } else {
         return "not_allowed";
@@ -496,13 +496,13 @@ export class Labo {
   };
 
   // show labo setting by director
-  findSetting = async (accountName : string, { user, message, hasAuthorization }: any,) =>{
-    if (message) {
+  findSetting = async (accountName: string, { user, message, hasAuthorization }: any) => {
+    if (message !== "user_success") {
       return message;
     } else {
       if (hasAuthorization(user, accountName)) {
-        const res = await LABO.findOne({"account.name" : accountName});
-        if(res){
+        const res = await LABO.findOne({ "account.name": accountName });
+        if (res) {
           return res.setting
         } else {
           return "not_founded"
@@ -511,5 +511,155 @@ export class Labo {
         return "not_allowed";
       }
     }
+  };
+
+  /**************************
+   ****** Labo Settings *****
+   **************************/
+  addNewRole = (args: any, req: any) => {
+    const { user, message, hasAuthorization } = req
+
+    if (hasAuthorization(user)) {
+
+      try {
+        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+
+          let newRole: any = {};
+
+          newRole.addedby = user.userId
+          newRole.role = args.status
+          newRole.permissions = [
+            { componentName: "catalogue", create: false, read: false, update: false, delete: false },
+            { componentName: "Personelles", create: false, read: false, update: false, delete: false },
+            { componentName: "Parametres", create: false, read: false, update: false, delete: false },
+          ]
+
+          if (r) {
+            r.setting.team.push(newRole);
+            r.save(e => {
+              if (e) throw new Error(e);
+              else console.log("saved")
+            })
+          }
+
+          else {
+            console.log("no_account_founded")
+            return "no_account_founded"
+          }
+
+        });
+
+        return "role_added_successfully"
+
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
+
+    else return "user_has_no_permission"
+  };
+  updateRole = (args: any, req: any) => {
+
+  };
+  // delete role from team
+  deleteRole = (args: any, req: any) => {
+    const { user, message, hasAuthorization } = req
+
+    if (hasAuthorization(user)) {
+
+      try {
+        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+          if (r) {
+            const index = r.setting.team.findIndex(t=>t.role = args.role);
+
+            if (index > -1) {
+              r.setting.team.splice(index, 1);
+            }
+
+            r.save(e => {
+              if (e) throw new Error(e);
+              else console.log("saved")
+            })
+          }
+
+          else {
+            console.log("no_account_founded")
+            return "no_account_founded"
+          }
+        });
+
+        return "role_deleted_successfully"
+
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
+    else return "user_has_no_permission"
+  };
+
+  addPermissionToRole = () => { };
+  // update permissions
+  updatePermissionOfRole = (args: any, req: any) => {
+    const { user, message, hasAuthorization } = req
+    const { role, permissions } = args;
+    if (hasAuthorization(user)) {
+
+      try {
+        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+
+          if (r) {
+            // find role
+            r.setting.team.map(r => {
+              if (r.role === role) {
+                r.permissions.map((p: any) => {
+                  permissions.map((u: any) => {
+                    if (p.componentName === u.componentName) {
+                      p.create = u.create
+                      p.read = u.read
+                      p.update = u.update
+                      p.delete = u.delete
+                    }
+                  })
+                })
+              }
+            })
+            // update permissions
+            // save and return success massage
+            r.save((e: any) => {
+              if (e) throw new Error(e);
+              else console.log("saved")
+            })
+          }
+
+          else {
+            console.log("no_account_founded")
+            return "no_account_founded"
+          }
+
+        });
+
+        return "role_added_successfully"
+
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
+
+    else return "user_has_no_permission"
+  };
+  // delete permissions module from Role
+  deletePermissionOfRole = () => { };
+
+  // team queries
+  fetchAccountRoles = async () => {
+    const res = await LABO.findOne({ "account.name": "FES" });
+
+    if (res) {
+      return res.setting.team;
+    }
+    return "no_account_roles_founded"
   }
 }
