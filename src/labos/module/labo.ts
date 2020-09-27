@@ -1,26 +1,34 @@
 import { Schema, model, Document } from "mongoose";
+import { Appointement } from "../../appointement/module/appointement";
 import { LaboStaff, LaboShift } from '../../staff/module/staff';
 import * as settings from "./settings";
 
 type LaboModel = ILabo & Document;
 
 const LaboCatalogListUpdateSchema = new Schema({
-  userID: String,
+  userID: { type: Schema.Types.ObjectId, ref: 'USER' },
   testReported: Number,
   testPrice: Number,
-  testReferred: String,
-  date: Date,
+  testReferred: Boolean,
+  createdAt: String,
 });
 
 const LaboCatalogListSchema = new Schema(
   {
-    testID: String,
+    testId: { type: Schema.Types.ObjectId, ref: 'TESTS' },
+    testReported: Number,
+    testPrice: Number,
+    testReferred: Boolean,
     update: [LaboCatalogListUpdateSchema],
   },
   { strict: false }
 );
 
 const LaboCatalogSchema = new Schema({
+  createdBy: { type: Schema.Types.ObjectId, ref: 'USER' },
+  title : String,
+  description : String,
+  bFactor: Number,
   list: [LaboCatalogListSchema],
 });
 
@@ -61,13 +69,36 @@ const LaboSchema = new Schema({
     },
   },
 
-  catalog: LaboCatalogSchema,
+  /**
+   * price for contributors, pros
+   * and affiliates
+   */
+  catalogs: [LaboCatalogSchema],
 
+  /**
+   * all lab orders
+   * goes here
+   */
   orders: {},
 
+  /**
+   * orders inteLabs goes here
+   */
   refferal: {},
 
+  /**
+   * contributors are pro accounts that 
+   * send orders to lab
+   */
+  contributors : [],
+
+  /**
+   * is for both professional and non professional Health
+   * affiliate person can send orders to lab and get
+   * commissions
+   */
   affiliate: {},
+
   /**
    * laboratoire staff that hold all
    * about labo staff
@@ -99,10 +130,15 @@ const LaboSchema = new Schema({
 
     // what automate the labo has
     automates: [settings.laboSettingAutomate],
-    
+
     // status of team that labo has
-    team : [settings.laboSettingTeam]
+    team: [settings.laboSettingTeam]
   },
+
+  /**
+   * clients appointement
+  */
+  appointements : [Appointement]
 });
 
 export const LABO = model<LaboModel>("LABO", LaboSchema);

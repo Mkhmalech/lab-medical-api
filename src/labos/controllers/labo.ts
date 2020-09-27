@@ -25,7 +25,7 @@ export class Labo {
     const labo = this.Labo.getOneByQuery({ "account.name": name });
     return labo;
   };
-  // search labo by ame
+  // search labo by name
   searchLaboByName = async ({ query }: any) => {
     let q = query;
     q = new RegExp(q, "ig");
@@ -355,6 +355,7 @@ export class Labo {
     // get account name from args
     const { accountName } = args
     const setting: any = await this.findSetting(accountName, req);
+
     if (typeof setting === "string") {
       return [{ name: setting }]
     } else {
@@ -420,7 +421,7 @@ export class Labo {
         accountName,
         req,
         (r) => {
-          r.setting.holidays.push({ holiday: holiday, duration : duration, createdAt: new Date().toString() })
+          r.setting.holidays.push({ holiday: holiday, duration: duration, createdAt: new Date().toString() })
           r.save();
         }
       );
@@ -497,19 +498,21 @@ export class Labo {
 
   // show labo setting by director
   findSetting = async (accountName: string, { user, message, hasAuthorization }: any) => {
+
     if (message !== "user_success") {
       return message;
     } else {
-      if (hasAuthorization(user, accountName)) {
-        const res = await LABO.findOne({ "account.name": accountName });
-        if (res) {
-          return res.setting
-        } else {
-          return "not_founded"
-        }
+      // if (hasAuthorization(user, accountName)) {
+      const res = await LABO.findOne({ "account.name": accountName });
+
+      if (res) {
+        return res.setting
       } else {
-        return "not_allowed";
+        return "not_founded"
       }
+      // } else {
+      //   return "not_allowed";
+      // }
     }
   };
 
@@ -571,7 +574,7 @@ export class Labo {
       try {
         LABO.findOne({ "account.name": "FES" }, (e, r) => {
           if (r) {
-            const index = r.setting.team.findIndex(t=>t.role = args.role);
+            const index = r.setting.team.findIndex(t => t.role = args.role);
 
             if (index > -1) {
               r.setting.team.splice(index, 1);
@@ -605,7 +608,6 @@ export class Labo {
     const { user, message, hasAuthorization } = req
     const { role, permissions } = args;
     if (hasAuthorization(user)) {
-
       try {
         LABO.findOne({ "account.name": "FES" }, (e, r) => {
 
@@ -662,4 +664,176 @@ export class Labo {
     }
     return "no_account_roles_founded"
   }
+
+  /**
+   * Catalog functions
+  */
+  fetchCatalogs = async (req: any) => {
+    const res = await LABO.findById('5e4ac28c714f5537a4863f17', (e: string, r: any) => {
+      if (e) throw new Error(e);
+      if (r) {
+        return r;
+      }
+    })
+    return (res && res.catalogs);
+  }
+  fetchCatalog = async ({ id }: any, req: any) => {
+    const res = await LABO.findById('5e4ac28c714f5537a4863f17').select("catalogs")
+      .then(r => r && r.catalogs)
+      .then((cat: any) => {
+        if (cat) {
+          return cat.find((c: any) => c._id == id)
+        }
+      })
+    return res;
+  }
+
+  //  add new catalog
+  addNewCatalog = ({ catalog }: any, req: any) => {
+    LABO.findOne({ "account.name": "FES" }, (e: string, r: any) => {
+      if (e) throw new Error(e);
+      if (r) {
+        r.catalog.push(catalog);
+        r.save()
+      }
+    })
+
+  }
+
+  // update catalog
+  updateCatalog = ({ catalog }: any, req: any) => {
+    try {
+      LABO.findOne({ "account.name": "FES" }, (e: string, r: any) => {
+        if (e) throw new Error(e);
+        if (r) {
+
+          if (catalog.title) r.catalogs.id(catalog._id).title = catalog.title
+          if (catalog.description) r.catalogs.id(catalog._id).description = catalog.description
+          if (catalog.bFactor) r.catalogs.id(catalog._id).bFactor = catalog.bFactor
+
+          r.save()
+        }
+      })
+
+      return "success"
+
+    } catch (e) {
+      console.log(e);
+      return "failed";
+    }
+  }
+
+  /**
+   * catalog list operations
+   * 
+   */
+
+  // modify price
+  catalogModiyTestPrice = ({ catalogId, testId, price }: any, { user }: any) => {
+    try {
+
+      LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+        if (e) throw new Error(e);
+        if (r) {
+          const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
+          if (catalogIndex >= 0) {
+  
+            const listIndex = r.catalogs[catalogIndex].list.findIndex((l: any) => l.testId == testId.toString())
+  
+            if (listIndex >= 0)
+              r.catalogs[catalogIndex].list[listIndex].testPrice = price
+  
+            else 
+              r.catalogs[catalogIndex].list.push({ testId: testId, testPrice: price })
+          }
+  
+          else return "lab_catalog_not_founded"
+  
+          r.save()
+        }
+      })
+
+      return "modify_catalog_list_price_success"
+
+    } catch (e) {
+
+      console.log(e);
+
+      return "modify_catalog_list_price_failed"
+    }
+  };
+
+  // modify is test referred
+  catalogModiyTestReferred = ({ catalogId, testId, referred }: any, { user }: any) => {
+
+    LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+      if (e) throw new Error(e);
+      if (r) {
+        const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
+        if (catalogIndex >= 0) {
+
+          const listIndex = r.catalogs[catalogIndex].list.findIndex((l: any) => l.testId == testId.toString())
+
+          if (listIndex >= 0)
+            r.catalogs[catalogIndex].list[listIndex].testReferred = referred
+
+          else 
+            r.catalogs[catalogIndex].list.push({ testId: testId, testReferred: referred })
+        }
+
+        else return "lab_catalog_not_founded"
+
+        r.save()
+      }
+    })
+
+    return "modify_catalog_list_price_success"
+  };
+
+  // modify report time
+  catalogModiyTestReported = ({ catalogId, testId, reported }: any, { user }: any) => { 
+    try {
+
+      LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+        if (e) throw new Error(e);
+        if (r) {
+          const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
+          if (catalogIndex >= 0) {
+  
+            const listIndex = r.catalogs[catalogIndex].list.findIndex((l: any) => l.testId == testId.toString())
+  
+            if (listIndex >= 0)
+              r.catalogs[catalogIndex].list[listIndex].testReported = reported
+  
+            else 
+              r.catalogs[catalogIndex].list.push({ testId: testId, testReported: reported })
+          }
+  
+          else return "lab_catalog_not_founded"
+  
+          r.save()
+        }
+      })
+
+      return "modify_catalog_list_price_success"
+
+    } catch (e) {
+
+      console.log(e);
+
+      return "modify_catalog_list_price_failed"
+    }
+  };
+
+  // fetch tests in catalog
+  catalogFetchModiedTest = async ({catalogId}:any, {user}:any)=>{
+    const res = await LABO.findOne({ "account.name": "FES" })
+    if(res) {
+      const catalog : any[] = [...res.catalogs];
+      const i = catalog.findIndex((c:any)=>c._id == catalogId.toString());
+      if(i>=0) return catalog[i].list
+      else return "catalog_not_founded"
+    } else return "lab_account_not_founded"
+  }
+
 }

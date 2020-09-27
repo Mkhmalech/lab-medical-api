@@ -4,6 +4,20 @@ const labo = new Labo();
 
 export const LaboResolver = {
   catalog: {
+    
+    // catalog operation
+    fetchCatalogs : labo.fetchCatalogs,
+    fetchCatalog : labo.fetchCatalog,
+    addNewCatalog : labo.addNewCatalog,
+    updateCatalog : labo.updateCatalog, 
+
+    // catalog list operations
+    catalogModiyTestPrice : labo.catalogModiyTestPrice,
+    catalogModiyTestReferred : labo.catalogModiyTestReferred,
+    catalogModiyTestReported : labo.catalogModiyTestReported,
+    catalogFetchModiedTest : labo.catalogFetchModiedTest,
+
+    // old operations
     laboCatalogListing: labo.catalogTests,
     laboCatalogListTest: labo.catalogListTest,
     catalogListTests: labo.catalogListTests,

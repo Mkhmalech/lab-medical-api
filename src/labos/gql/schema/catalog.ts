@@ -1,4 +1,24 @@
+const catalogId = `CatalogId : ID`
+
+const catalog = `
+    _id : ID
+    title : String
+    description : String
+    bFactor : Float
+`
+const catalogTest = `
+    catalogId: ID 
+    testId : ID 
+    testPrice : Int
+    testReferred : Boolean
+    testReported : Int
+`
 export const LaboCatalog = `
+
+type LabCatalog {${catalog}}
+input Catalog {${catalog}}
+
+type LabCatalogTest {${catalogTest}}
 
 input ListTest {
     testId   : String
@@ -55,6 +75,18 @@ input CatalogUpdateOne {
 }
 
 type LaboCatalog {
+
+    fetchCatalogs : [LabCatalog]
+    fetchCatalog(id : ID!) : LabCatalog
+    updateCatalog(catalog : Catalog) : String
+
+    catalogModiyTestPrice(catalogId: ID, testId : ID , price : Int) : String
+    catalogModiyTestReferred(catalogId: ID, testId : ID , referred : Boolean) : String
+    catalogModiyTestReported(catalogId: ID, testId : ID , reported : Int) : String
+
+    catalogFetchModiedTest(catalogId: ID) : [LabCatalogTest]
+
+    addNewCatalog(catalog: Catalog) : String
 
     laboCatalogListing (catalogUpdate : CatalogUpdate) : [LaboCatalogListUpdate]
 

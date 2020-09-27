@@ -123,19 +123,19 @@ interface LabLaboContact {
   address: LabLaboContactAddress;
 }
 interface LabLaboCatalogListTest {
-  userID?: string;
+  userId?: string;
   testReported: number;
   testPrice?: number;
   testReferred?: boolean;
   date?: Date;
 }
 interface LabLaboCatalogList {
-  testID: string;
+  testId: string;
   update?: LabLaboCatalogListTest[];
 }
 
 interface LabLaboCatalog {
-  list: LabLaboCatalogList[];
+  list: any[];
 }
 
 interface LabLaboOrder {}
@@ -151,7 +151,7 @@ interface LabLaboCertification {}
 interface ILabo {
   account: LabLaboAccount;
   contact: LabLaboContact;
-  catalog: LabLaboCatalog;
+  catalogs: any[];
   order: LabLaboOrder;
   referral: LabLaboReferral;
   affiliate: LabLaboAffiliate;
