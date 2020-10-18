@@ -23,9 +23,8 @@ export const createAppointement = ({appoint} : any, req: any) =>{
     
 }
 
-export const fetchAppointements = async (req : any) => {
-    const res = await LABO.findOne({'account.name' : 'FES'})
+export const fetchAppointements = async (args : any, {user} : any) => {
+    const res = await LABO.findById(user.accountId)
                     .select('appointements').then((appoint:any)=>appoint.appointements)
-    console.log(res)
     return res;
 }

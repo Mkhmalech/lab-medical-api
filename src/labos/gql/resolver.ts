@@ -52,5 +52,7 @@ export const LaboResolver = {
 
   LaboDetails: labo.getLaboByName,
 
+  addNewAccountLab: labo.addNewAccountLab,
+
   searchLaboByName: labo.searchLaboByName
 };

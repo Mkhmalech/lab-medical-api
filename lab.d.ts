@@ -165,5 +165,6 @@ interface ILabo {
     Automates: any[],
     team : any[]
   },
-  staff : any[]
+  staff : any[],
+  extensions : any[]
 }

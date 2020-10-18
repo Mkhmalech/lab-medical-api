@@ -53,7 +53,7 @@ class Staff extends Labo {
    *
    */
   employerListAll = async (args: any, req: any) => {
-    const { accountName } = args;
+    const { accountName } = req;
     let staff: any[] = [];
     const resultat: any = await this.findStaff(accountName, req);
     if (typeof resultat === "string") {
@@ -82,7 +82,7 @@ class Staff extends Labo {
   employerAddNew = async (args: any, req: any) => {
     const { employer } = args;
     try {
-      const res = await this.addPersonal(employer.accountName, req, (r) => {
+      const res = await this.addPersonal(req.accountName, req, (r) => {
         employer.addedBy = req.user.userId;
 
         // check if departement set or not
@@ -222,8 +222,8 @@ class Staff extends Labo {
     }
   };
 
-  fetchExistingEmployer = async (args: any) => {
-    var doc = await LABO.findOne({ "account.name": args.accountName });
+  fetchExistingEmployer = async (args: any, req:any) => {
+    var doc = await LABO.findOne({ "account.name": req.accountName });
     if (doc) {
       var index = doc.staff.findIndex(staff => staff._id == args.employerId);
       if (index > -1) {

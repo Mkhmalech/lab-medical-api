@@ -35,11 +35,19 @@ const Labo = `
     ${Contact}
 
     type LaboInfo {
+        _id : ID
         account : Account
         contact : Contact
     }
     type Labo {
         LaboInfoListAll : [LaboInfo]
+        addNewAccountLab(
+            name : String,
+            Fix : String,
+            fax : String,
+            street : String,
+            city : String
+        ) : String
     }
 `
 
@@ -66,6 +74,13 @@ export const LaboSchema = buildSchema(`
     type laboMutation {
         setting : LaboSetting
         team : LaboTeam
+        addNewAccountLab(
+            name : String,
+            Fix : String,
+            fax : String,
+            street : String,
+            city : String
+        ) : String
     }
 
     schema {

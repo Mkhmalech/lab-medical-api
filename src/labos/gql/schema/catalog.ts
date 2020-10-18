@@ -86,7 +86,10 @@ type LaboCatalog {
 
     catalogFetchModiedTest(catalogId: ID) : [LabCatalogTest]
 
-    addNewCatalog(catalog: Catalog) : String
+    addNewCatalog(
+        title: String, description: String,  bFactor: Float, 
+        addressedTo : String, addressedToId: ID
+    ) : String
 
     laboCatalogListing (catalogUpdate : CatalogUpdate) : [LaboCatalogListUpdate]
 

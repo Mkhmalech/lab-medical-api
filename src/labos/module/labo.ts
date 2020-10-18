@@ -1,6 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 import { Appointement } from "../../appointement/module/appointement";
 import { LaboStaff, LaboShift } from '../../staff/module/staff';
+import { extensionSchema } from "./extension";
 import * as settings from "./settings";
 
 type LaboModel = ILabo & Document;
@@ -29,6 +30,8 @@ const LaboCatalogSchema = new Schema({
   title : String,
   description : String,
   bFactor: Number,
+  addressedTo : String,
+  addressedToId : { type: Schema.Types.ObjectId },
   list: [LaboCatalogListSchema],
 });
 
@@ -134,7 +137,10 @@ const LaboSchema = new Schema({
     // status of team that labo has
     team: [settings.laboSettingTeam]
   },
-
+  /**
+   * activated modules
+   */
+  extensions : [extensionSchema],
   /**
    * clients appointement
   */

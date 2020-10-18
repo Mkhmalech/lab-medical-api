@@ -139,7 +139,35 @@ export class Labo {
       });
     }
   };
+  // add labo account
+  addNewAccountLab = async (args : any, {user} : any) =>{
+    const r = await LABO.findOne({'account.name' : args.name}, (e:any, res:any) =>{
+      if(e) throw new Error(e);
+      if(res) return "account_already_exist"
+      else {
+        let newLab : any = new LABO();
+        newLab.account.name = args.name.toUpperCase();
 
+        newLab.account.code = 1;
+
+        newLab.contact.tele.fix.push(args.Fix);
+
+        if (args.fax) {
+          newLab.contact.tele.fax.push(args.fax);
+        }
+
+        newLab.contact.address.street = args.street;
+
+        newLab.contact.address.city = args.city;
+
+        if(newLab.save()) return "account_saved_succeffully"
+        else return "account_not_saved"
+      }
+    })
+
+    return r;
+  }
+  // select lab catalog
   selectLaboCatalog = (cb: (lab: any) => void) => this.selectLabo;
 
   // Laboratory
@@ -353,7 +381,7 @@ export class Labo {
    **************************/
   departementsListing = async (args: any, req: any) => {
     // get account name from args
-    const { accountName } = args
+    const { accountName } = req
     const setting: any = await this.findSetting(accountName, req);
 
     if (typeof setting === "string") {
@@ -364,7 +392,7 @@ export class Labo {
   };
   holidaysListing = async (args: any, req: any) => {
     // get account name from args
-    const { accountName } = args
+    const { accountName } = req
     const setting: any = await this.findSetting(accountName, req);
     if (typeof setting === "string") {
       return [{ name: setting }]
@@ -374,7 +402,7 @@ export class Labo {
   };
   leavesListing = async (args: any, req: any) => {
     // get account name from args
-    const { accountName } = args
+    const { accountName } = req
     const setting: any = await this.findSetting(accountName, req);
     if (typeof setting === "string") {
       return [{ name: setting }]
@@ -384,7 +412,7 @@ export class Labo {
   };
   automatesListing = async (args: any, req: any) => {
     // get account name from args
-    const { accountName } = args
+    const { accountName } = req
     const setting: any = await this.findSetting(accountName, req);
     if (typeof setting === "string") {
       return [{ name: setting }]
@@ -398,7 +426,7 @@ export class Labo {
     const { departement } = args;
     try {
       const res = await this.addSetting(
-        departement.accountName,
+        req.accountName,
         req,
         (r) => {
           r.setting.departements.push({ name: departement.name, date: new Date().toString() })
@@ -418,7 +446,7 @@ export class Labo {
     const { holiday: { holiday, duration, accountName } } = args;
     try {
       const res = await this.addSetting(
-        accountName,
+        req.accountName,
         req,
         (r) => {
           r.setting.holidays.push({ holiday: holiday, duration: duration, createdAt: new Date().toString() })
@@ -438,7 +466,7 @@ export class Labo {
     const { leave: { leave, duration, accountName } } = args;
     try {
       const res = await this.addSetting(
-        accountName,
+        req.accountName,
         req,
         (r) => {
           r.setting.leaves.push({ leave: leave, duration: duration, createdAt: new Date().toString() })
@@ -458,7 +486,7 @@ export class Labo {
     const { automate: { brand, analyzer, entryDate, accountName } } = args;
     try {
       const res = await this.addSetting(
-        accountName,
+        req.accountName,
         req,
         (r) => {
           r.setting.automates.push({ brand: brand, analyzer: analyzer, entryDate: entryDate, createdAt: new Date().toString() })
@@ -525,7 +553,7 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
 
           let newRole: any = {};
 
@@ -572,7 +600,7 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
           if (r) {
             const index = r.setting.team.findIndex(t => t.role = args.role);
 
@@ -609,7 +637,7 @@ export class Labo {
     const { role, permissions } = args;
     if (hasAuthorization(user)) {
       try {
-        LABO.findOne({ "account.name": "FES" }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
 
           if (r) {
             // find role
@@ -656,8 +684,8 @@ export class Labo {
   deletePermissionOfRole = () => { };
 
   // team queries
-  fetchAccountRoles = async () => {
-    const res = await LABO.findOne({ "account.name": "FES" });
+  fetchAccountRoles = async (args: any, req:any) => {
+    const res = await LABO.findOne({ "account.name": req.accountName });
 
     if (res) {
       return res.setting.team;
@@ -668,8 +696,8 @@ export class Labo {
   /**
    * Catalog functions
   */
-  fetchCatalogs = async (req: any) => {
-    const res = await LABO.findById('5e4ac28c714f5537a4863f17', (e: string, r: any) => {
+  fetchCatalogs = async (args:any, {user}: any) => {
+    const res = await LABO.findById(user.accountId, (e: string, r: any) => {
       if (e) throw new Error(e);
       if (r) {
         return r;
@@ -677,8 +705,8 @@ export class Labo {
     })
     return (res && res.catalogs);
   }
-  fetchCatalog = async ({ id }: any, req: any) => {
-    const res = await LABO.findById('5e4ac28c714f5537a4863f17').select("catalogs")
+  fetchCatalog = async ({ id }: any, {user}: any) => {
+    const res = await LABO.findById(user.accountId).select("catalogs")
       .then(r => r && r.catalogs)
       .then((cat: any) => {
         if (cat) {
@@ -689,11 +717,15 @@ export class Labo {
   }
 
   //  add new catalog
-  addNewCatalog = ({ catalog }: any, req: any) => {
-    LABO.findOne({ "account.name": "FES" }, (e: string, r: any) => {
+  addNewCatalog = (args: any, {user}: any) => {
+    LABO.findById(user.accountId, (e: string, r: any) => {
       if (e) throw new Error(e);
       if (r) {
-        r.catalog.push(catalog);
+        let Catalog = {
+          ...args,
+          createdBy : user.userId,
+        }
+        r.catalogs.push(Catalog);
         r.save()
       }
     })
@@ -701,9 +733,9 @@ export class Labo {
   }
 
   // update catalog
-  updateCatalog = ({ catalog }: any, req: any) => {
+  updateCatalog = ({ catalog }: any, {user}: any) => {
     try {
-      LABO.findOne({ "account.name": "FES" }, (e: string, r: any) => {
+      LABO.findById(user.accountId, (e: string, r: any) => {
         if (e) throw new Error(e);
         if (r) {
 
@@ -732,7 +764,7 @@ export class Labo {
   catalogModiyTestPrice = ({ catalogId, testId, price }: any, { user }: any) => {
     try {
 
-      LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+      LABO.findById(user.accountId, (e: any, r: any) => {
         if (e) throw new Error(e);
         if (r) {
           const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
@@ -766,7 +798,7 @@ export class Labo {
   // modify is test referred
   catalogModiyTestReferred = ({ catalogId, testId, referred }: any, { user }: any) => {
 
-    LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+    LABO.findById(user.accountId, (e: any, r: any) => {
       if (e) throw new Error(e);
       if (r) {
         const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
@@ -794,7 +826,7 @@ export class Labo {
   catalogModiyTestReported = ({ catalogId, testId, reported }: any, { user }: any) => { 
     try {
 
-      LABO.findOne({ "account.name": "FES" }, (e: any, r: any) => {
+      LABO.findById(user.accountId, (e: any, r: any) => {
         if (e) throw new Error(e);
         if (r) {
           const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
@@ -827,7 +859,7 @@ export class Labo {
 
   // fetch tests in catalog
   catalogFetchModiedTest = async ({catalogId}:any, {user}:any)=>{
-    const res = await LABO.findOne({ "account.name": "FES" })
+    const res = await LABO.findById(user.accountId)
     if(res) {
       const catalog : any[] = [...res.catalogs];
       const i = catalog.findIndex((c:any)=>c._id == catalogId.toString());
