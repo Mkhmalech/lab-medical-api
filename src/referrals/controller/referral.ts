@@ -33,8 +33,8 @@ export const searchTests = async ({query} : any, {user} : any) => {
                     })
                 })
             })
-            return(resCat.flat())
+            return([].concat(...resCat))
     } else {
-        return "no_test_founded";
+        return new Error("no_test_founded");
     }
 }

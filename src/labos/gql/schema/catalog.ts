@@ -5,6 +5,7 @@ const catalog = `
     title : String
     description : String
     bFactor : Float
+    addressedTo : String
 `
 const catalogTest = `
     catalogId: ID 
