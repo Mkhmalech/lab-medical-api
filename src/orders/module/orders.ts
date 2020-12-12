@@ -16,6 +16,7 @@ interface iOrder {
     patient? : any
     laboratory ?: any
     referredFrom? : any
+    referredFromCabinet? : any
     sample? : {
         /**
          * sampleType
@@ -57,6 +58,7 @@ export const LabOrder = new Schema({
     },
     laboratory : { type: Schema.Types.ObjectId, ref: 'LABO' },
     referredFrom : { type: Schema.Types.ObjectId, ref: 'LABO' },
+    referredFromCabinet : { type: Schema.Types.ObjectId, ref: 'CABINET' },
     sample : {},
     panel : [LabOrderPanel]
 })

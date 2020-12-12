@@ -26,6 +26,15 @@ const Employer = `
         departement : Departement
     }
 `
+const Cabinet = `
+    type CabinetAccount {
+        name : String
+    }
+    type Cabinet {
+        _id : ID
+        account : CabinetAccount
+    }
+`
 
 const shift = `
     type Shift {
@@ -59,6 +68,7 @@ const StaffQuery = `
         findEmployer(query : String) : Employer
         fetchAllShifts(accountName : String) : [Shift]
         fetchExistingEmployer(employerId : String, accountName : String) : Employer
+        fetchContributorCabinets : [Cabinet]
     }
 `
 
@@ -68,12 +78,15 @@ const StaffMutation = `
         employerDelete(id : ID) : String
         assignShiftsToEmployer(userId : ID, type : String, days : [Int], mounth: Int, year: Int, departementId: ID, accountName : String): String
         deleteShift(id : ID) : String
+        addContributorCabinet(id : ID) : String
     }
 `
 
 export const staffSchema = buildSchema(`
 
     ${Employer} 
+
+    ${Cabinet} 
 
     ${inputEmployer} 
 

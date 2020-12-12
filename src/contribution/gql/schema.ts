@@ -24,8 +24,7 @@ export const labReferralSchema = buildSchema(`
     }
 
     type refferalQuery {
-        searchTests(query : String, addressedTo : String) : [Referral]
-        searchContributorTests(query : String) : [Referral]
+        searchTests(query : String) : [Referral]
     }
 
     type refferalMutation {

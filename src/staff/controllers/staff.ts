@@ -104,8 +104,40 @@ class Staff extends Labo {
         return "success";
       }
     } catch (e) {
-      console.log(e);
+      return new Error(e);
     }
+  };
+  /**
+   * add employer
+   */
+  addContributorCabinet = async ({id}: any, req: any) => {
+    let contributor : any = {cabinetId : id}
+    try {
+      const res = await this.addPersonal(req.accountName, req, (r) => {
+        contributor.addedBy = req.user.userId;
+
+        contributor.createdAt = new Date().toString();
+
+        r.contributors.push(contributor);
+        r.save();
+      });
+      if (typeof res === "string") {
+        return res;
+      } else {
+        return "success";
+      }
+    } catch (e) {
+      return new Error(e);
+    }
+  };
+  /**
+   * add employer
+   */
+  fetchContributorCabinets = async ({id}: any, req: any) => {
+    const doc = await LABO.findOne({ "account.name": "FES"}).select("contributors.cabinetId").populate("contributors.cabinetId");
+    if(doc) {
+      return ( doc.contributors.map((cab : any)=> cab.cabinetId))
+    };
   };
   /**
    * delete employer
@@ -139,7 +171,6 @@ class Staff extends Labo {
     });
     if (result) {
       let employer: any = result.staff.filter((em: any) => em.firstName == q);
-      console.log(employer);
     }
   };
   /**
@@ -204,9 +235,9 @@ class Staff extends Labo {
   /**
    * delete existing shift
    */
-  deleteShift = async (args: any) => {
+  deleteShift = async (args: any, req : any) => {
     try {
-      LABO.findOne({ "account.name": "Centrale du CHU Hassan II" }, async (e, r) => {
+      LABO.findOne({ "account.name": req.accountName }, async (e, r) => {
         if (e) throw new Error(e);
         if (r) {
           const i = await r.shifts.findIndex((s) => s._id == args.id);

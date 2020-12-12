@@ -31,8 +31,13 @@ const LaboCatalogSchema = new Schema({
   description : String,
   bFactor: Number,
   addressedTo : String,
-  addressedToId : { type: Schema.Types.ObjectId },
+  addressedCabinetId : { type: Schema.Types.ObjectId, ref: 'CABINET' },
   list: [LaboCatalogListSchema],
+});
+const LaboContributorSchema = new Schema({
+  addedBy: { type: Schema.Types.ObjectId, ref: 'USER' },
+  cabinetId : { type: Schema.Types.ObjectId, ref: 'CABINET' },
+  createdAt : String
 });
 
 
@@ -93,7 +98,7 @@ const LaboSchema = new Schema({
    * contributors are pro accounts that 
    * send orders to lab
    */
-  contributors : [],
+  contributors : [LaboContributorSchema],
 
   /**
    * is for both professional and non professional Health

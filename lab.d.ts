@@ -166,5 +166,6 @@ interface ILabo {
     team : any[]
   },
   staff : any[],
+  contributors : any[],
   extensions : any[]
 }

@@ -40,6 +40,10 @@ export const labOrdersSchema = buildSchema(`
         _id : ID
         account : Account
     }
+    type Cabinet {
+        _id : ID
+        account : Account
+    }
 
     input panelInput ${panel}
     input patienInput ${patient}
@@ -68,6 +72,7 @@ export const labOrdersSchema = buildSchema(`
         ${OrderTime}
         laboratory : Labo
         referredFrom : Labo
+        referredFromCabinet : Cabinet
         OrderStatus : [Status]
         patient : Patient
     }
@@ -92,6 +97,7 @@ export const labOrdersSchema = buildSchema(`
 
     type orderMut {
         insertOrder(order : OrderInput, patient : patienInput) : String
+        insertCabinetOrder(order : OrderInput, patient : patienInput) : String
         referredOrdersDetails(orderId : String) : OrderDetails 
         referredOrdersChangeStatus(UOC : String, type : String) : NewStatus
     }

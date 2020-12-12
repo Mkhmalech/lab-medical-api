@@ -502,7 +502,6 @@ export class Labo {
       console.log(e);
     }
   };
-
   // handle add setting
   addSetting = (
     accountName: string,
@@ -523,7 +522,6 @@ export class Labo {
       }
     }
   };
-
   // show labo setting by director
   findSetting = async (accountName: string, { user, message, hasAuthorization }: any) => {
 
@@ -543,7 +541,6 @@ export class Labo {
       // }
     }
   };
-
   /**************************
    ****** Labo Settings *****
    **************************/
@@ -629,7 +626,6 @@ export class Labo {
     }
     else return "user_has_no_permission"
   };
-
   addPermissionToRole = () => { };
   // update permissions
   updatePermissionOfRole = (args: any, req: any) => {
@@ -682,7 +678,6 @@ export class Labo {
   };
   // delete permissions module from Role
   deletePermissionOfRole = () => { };
-
   // team queries
   fetchAccountRoles = async (args: any, req:any) => {
     const res = await LABO.findOne({ "account.name": req.accountName });
@@ -724,6 +719,11 @@ export class Labo {
         let Catalog = {
           ...args,
           createdBy : user.userId,
+        }
+        if(Catalog.addressedTo == "SubContractor") delete Catalog.addressedToId
+        if(Catalog.addressedTo == "Contributor") {
+          Catalog.addressedCabinetId = Catalog.addressedToId
+          delete Catalog.addressedToId;
         }
         r.catalogs.push(Catalog);
         r.save()

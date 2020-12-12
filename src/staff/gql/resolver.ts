@@ -10,4 +10,6 @@ export const staffResolver = {
     assignShiftsToEmployer : Staff.assignShiftsToEmployer,
     fetchAllShifts : Staff.listShifts,
     deleteShift : Staff.deleteShift,
+    addContributorCabinet : Staff.addContributorCabinet,
+    fetchContributorCabinets : Staff.fetchContributorCabinets,
 }
