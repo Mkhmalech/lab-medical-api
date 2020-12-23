@@ -2,6 +2,8 @@ import { LABO } from "../module/labo";
 import { autoIncLabos } from "../../../../code-ittyni-api/src/controller/code";
 import { Db } from "../../../../db-ittyni-api/src/db";
 
+import labdata from './laboData.json'
+
 import jwt from "jsonwebtoken";
 
 export class Labo {
@@ -13,11 +15,53 @@ export class Labo {
     // this.Labo.getAllFields();
     // this.insertManyLabosIntoDb(Laboss);
   }
+  // update labo address 
+  LaboUpdateAddress = ({ city }: any) => {
+    LABO.find((e, r) => {
+      if (r) {
+        for (let index = 0; index < r.length; index++) {
+          r[index].contact.address.city = city;
+          r[index].save();
+        }
+      }
+    })
+  }
+  // update labo address 
+  LaboAddNewLabos = () => {
+    labdata.map((lab: any) => {
+      let newLab = new LABO({
+        'account.name': lab.etablissement,
+        'contact.address.street': lab.street,
+        'contact.address.city': lab.city
+      });
+      newLab.contact.tele.fix.push(lab.tele)
+      newLab.save();
+    })
 
+    return "updated_succeffully"
+  }
   // Labo Info
   LaboListAll = () => {
     const labos: any = this.Labo.getAllFields();
     return labos;
+  };
+  // Labo Info
+  LaboListTwentyByCity = async ({ city }: any) => {
+    const labos: any = await LABO.find({ 'contact.address.city': city })
+      .select('account contact')
+      .then((labs: any) => {
+        let newLabs = [...labs]
+        newLabs = newLabs.slice(0, 20).map(() =>
+          newLabs.splice(Math.floor(Math.random() * newLabs.length), 1)[0]
+        )
+        return newLabs;
+      });
+    return (labos);
+  };
+  // Labo Info
+  LaboListByCity = async ({ city }: any) => {
+    const labos: any = await LABO.find({ 'contact.address.city': city }).select('account contact');
+    return (labos);
   };
 
   // labo details
@@ -140,12 +184,12 @@ export class Labo {
     }
   };
   // add labo account
-  addNewAccountLab = async (args : any, {user} : any) =>{
-    const r = await LABO.findOne({'account.name' : args.name}, (e:any, res:any) =>{
-      if(e) throw new Error(e);
-      if(res) return "account_already_exist"
+  addNewAccountLab = async (args: any, { user }: any) => {
+    const r = await LABO.findOne({ 'account.name': args.name }, (e: any, res: any) => {
+      if (e) throw new Error(e);
+      if (res) return "account_already_exist"
       else {
-        let newLab : any = new LABO();
+        let newLab: any = new LABO();
         newLab.account.name = args.name.toUpperCase();
 
         newLab.account.code = 1;
@@ -160,7 +204,7 @@ export class Labo {
 
         newLab.contact.address.city = args.city;
 
-        if(newLab.save()) return "account_saved_succeffully"
+        if (newLab.save()) return "account_saved_succeffully"
         else return "account_not_saved"
       }
     })
@@ -679,7 +723,7 @@ export class Labo {
   // delete permissions module from Role
   deletePermissionOfRole = () => { };
   // team queries
-  fetchAccountRoles = async (args: any, req:any) => {
+  fetchAccountRoles = async (args: any, req: any) => {
     const res = await LABO.findOne({ "account.name": req.accountName });
 
     if (res) {
@@ -691,7 +735,7 @@ export class Labo {
   /**
    * Catalog functions
   */
-  fetchCatalogs = async (args:any, {user}: any) => {
+  fetchCatalogs = async (args: any, { user }: any) => {
     const res = await LABO.findById(user.accountId, (e: string, r: any) => {
       if (e) throw new Error(e);
       if (r) {
@@ -700,7 +744,7 @@ export class Labo {
     })
     return (res && res.catalogs);
   }
-  fetchCatalog = async ({ id }: any, {user}: any) => {
+  fetchCatalog = async ({ id }: any, { user }: any) => {
     const res = await LABO.findById(user.accountId).select("catalogs")
       .then(r => r && r.catalogs)
       .then((cat: any) => {
@@ -712,16 +756,16 @@ export class Labo {
   }
 
   //  add new catalog
-  addNewCatalog = (args: any, {user}: any) => {
+  addNewCatalog = (args: any, { user }: any) => {
     LABO.findById(user.accountId, (e: string, r: any) => {
       if (e) throw new Error(e);
       if (r) {
         let Catalog = {
           ...args,
-          createdBy : user.userId,
+          createdBy: user.userId,
         }
-        if(Catalog.addressedTo == "SubContractor") delete Catalog.addressedToId
-        if(Catalog.addressedTo == "Contributor") {
+        if (Catalog.addressedTo == "SubContractor") delete Catalog.addressedToId
+        if (Catalog.addressedTo == "Contributor") {
           Catalog.addressedCabinetId = Catalog.addressedToId
           delete Catalog.addressedToId;
         }
@@ -733,7 +777,7 @@ export class Labo {
   }
 
   // update catalog
-  updateCatalog = ({ catalog }: any, {user}: any) => {
+  updateCatalog = ({ catalog }: any, { user }: any) => {
     try {
       LABO.findById(user.accountId, (e: string, r: any) => {
         if (e) throw new Error(e);
@@ -769,18 +813,18 @@ export class Labo {
         if (r) {
           const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
           if (catalogIndex >= 0) {
-  
+
             const listIndex = r.catalogs[catalogIndex].list.findIndex((l: any) => l.testId == testId.toString())
-  
+
             if (listIndex >= 0)
               r.catalogs[catalogIndex].list[listIndex].testPrice = price
-  
-            else 
+
+            else
               r.catalogs[catalogIndex].list.push({ testId: testId, testPrice: price })
           }
-  
+
           else return "lab_catalog_not_founded"
-  
+
           r.save()
         }
       })
@@ -809,7 +853,7 @@ export class Labo {
           if (listIndex >= 0)
             r.catalogs[catalogIndex].list[listIndex].testReferred = referred
 
-          else 
+          else
             r.catalogs[catalogIndex].list.push({ testId: testId, testReferred: referred })
         }
 
@@ -823,7 +867,7 @@ export class Labo {
   };
 
   // modify report time
-  catalogModiyTestReported = ({ catalogId, testId, reported }: any, { user }: any) => { 
+  catalogModiyTestReported = ({ catalogId, testId, reported }: any, { user }: any) => {
     try {
 
       LABO.findById(user.accountId, (e: any, r: any) => {
@@ -831,18 +875,18 @@ export class Labo {
         if (r) {
           const catalogIndex = r.catalogs.findIndex((c: any) => c._id == `${catalogId}`);
           if (catalogIndex >= 0) {
-  
+
             const listIndex = r.catalogs[catalogIndex].list.findIndex((l: any) => l.testId == testId.toString())
-  
+
             if (listIndex >= 0)
               r.catalogs[catalogIndex].list[listIndex].testReported = reported
-  
-            else 
+
+            else
               r.catalogs[catalogIndex].list.push({ testId: testId, testReported: reported })
           }
-  
+
           else return "lab_catalog_not_founded"
-  
+
           r.save()
         }
       })
@@ -858,12 +902,12 @@ export class Labo {
   };
 
   // fetch tests in catalog
-  catalogFetchModiedTest = async ({catalogId}:any, {user}:any)=>{
+  catalogFetchModiedTest = async ({ catalogId }: any, { user }: any) => {
     const res = await LABO.findById(user.accountId)
-    if(res) {
-      const catalog : any[] = [...res.catalogs];
-      const i = catalog.findIndex((c:any)=>c._id == catalogId.toString());
-      if(i>=0) return catalog[i].list
+    if (res) {
+      const catalog: any[] = [...res.catalogs];
+      const i = catalog.findIndex((c: any) => c._id == catalogId.toString());
+      if (i >= 0) return catalog[i].list
       else return "catalog_not_founded"
     } else return "lab_account_not_founded"
   }

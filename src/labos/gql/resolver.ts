@@ -50,9 +50,17 @@ export const LaboResolver = {
   },
   LaboListAll: labo.LaboListAll,
 
+  LaboListByCity: labo.LaboListByCity,
+
+  LaboListTwentyByCity: labo.LaboListTwentyByCity,
+
   LaboDetails: labo.getLaboByName,
 
   addNewAccountLab: labo.addNewAccountLab,
 
-  searchLaboByName: labo.searchLaboByName
+  searchLaboByName: labo.searchLaboByName,
+
+  LaboUpdateAddress : labo.LaboUpdateAddress,
+
+  LaboAddNewLabos : labo.LaboAddNewLabos,
 };

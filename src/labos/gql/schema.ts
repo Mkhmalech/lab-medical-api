@@ -19,6 +19,7 @@ const Address = `
         province : String
         commune : String
         street : String
+        city : String
     }
 `
 const Contact = `
@@ -66,12 +67,16 @@ export const LaboSchema = buildSchema(`
     type LaboQuery {
         catalog : LaboCatalog
         LaboListAll : [LaboInfo]
+        LaboListByCity(city : String) : [LaboInfo]
+        LaboListTwentyByCity(city : String) : [LaboInfo]
         LaboDetails(name : String) : LaboInfo
         searchLaboByName(query : String) : [Account]
         team : LaboTeamQuery
     }
 
     type laboMutation {
+        LaboUpdateAddress(city : String) : String 
+        LaboAddNewLabos : String 
         setting : LaboSetting
         team : LaboTeam
         addNewAccountLab(

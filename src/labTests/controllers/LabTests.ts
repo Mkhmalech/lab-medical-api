@@ -22,6 +22,22 @@ export class LabTests {
         };
       });
     });
+  /**
+   * fetch twenty labtests
+   */
+  fetchTwentyLabTests_fr = () =>
+    TESTS.find({ "name.fr": { $exists: true  } }).then((tests: any[]) => {
+      let newTests = [...tests]
+      newTests = newTests.slice(0, 20).map(()=>
+        newTests.splice(Math.floor(Math.random() * newTests.length), 1)[0]
+      )
+      return newTests.map((test: any) => {
+        return {
+          ...test._doc,
+          id: test._doc._id.toString()
+        };
+      });
+    });
   LabTestsFrFilterByNameAndMnemonic = async ({query} : any) => {
 
     let q = query;

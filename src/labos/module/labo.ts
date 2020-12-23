@@ -66,6 +66,10 @@ const LaboSchema = new Schema({
       province: {
         type: String,
       },
+      
+      city: {
+        type: String,
+      },
 
       commune: {
         type: String,
