@@ -1,6 +1,6 @@
 import { LABO } from "../module/labo";
-import { autoIncLabos } from "../../../../code-ittyni-api/src/controller/code";
-import { Db } from "../../../../db-ittyni-api/src/db";
+import { autoIncLabos } from "../../../../../code-ittyni-api/src/controller/code";
+import { Db } from "../../../../../db-ittyni-api/src/db";
 
 import labdata from './laboData.json'
 
@@ -16,6 +16,12 @@ export class Labo {
     // this.insertManyLabosIntoDb(Laboss);
   }
   // update labo address 
+  fetchLaboById = async ({ id }: any) => {
+    const res: any = await LABO.findById(id).select('account contact');
+    if (!res) return "no_result_founded";
+    else return res;
+  }
+  // update labo address 
   LaboUpdateAddress = ({ city }: any) => {
     LABO.find((e, r) => {
       if (r) {
@@ -26,13 +32,17 @@ export class Labo {
       }
     })
   }
+  // delete repeated account
+  LaboDeleteRepeatedAccount = ()=>{
+    LABO.find({"contact.address.city" : "meknes"}).remove().exec(e=>console.log(e));
+  }
   // update labo address 
   LaboAddNewLabos = () => {
     labdata.map((lab: any) => {
       let newLab = new LABO({
         'account.name': lab.etablissement,
         'contact.address.street': lab.street,
-        'contact.address.city': lab.city
+        'contact.address.city': lab.city.toLowerCase()
       });
       newLab.contact.tele.fix.push(lab.tele)
       newLab.save();
@@ -66,7 +76,7 @@ export class Labo {
 
   // labo details
   getLaboByName = ({ name }: any) => {
-    const labo = this.Labo.getOneByQuery({ "account.name": name });
+    const labo = this.Labo.getOneByQuery({ "account.name": new RegExp(name,'ig') });
     return labo;
   };
   // search labo by name
@@ -76,11 +86,7 @@ export class Labo {
 
     const res = await LABO.find({ "account.name": q });
 
-    let result: any[] = [];
-
-    res.map((labo) => result.push(labo.account));
-
-    return [...result];
+    return res;
   };
   // Labo Catalog
   catalogTests = ({ catalogUpdate }: any) => {

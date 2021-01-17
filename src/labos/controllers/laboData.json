@@ -1,484 +1,114 @@
 [
     {
-        "etablissement": "BIOLAB",
+        "etablissement": "CENTRE DE BIOLOGIE MEDICALE OUISLANE",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537720835",
-        "street": "4 RUE BEYROUTH. RES. SAADA",
-        "city": "rabat"
+        "tele": "0535507677",
+        "street": "839  RIAD OUISLANE 1",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CABINET D ANAPATH ESSAADA",
+        "etablissement": "LABORATOIRE BENALI D ANATOMIE PATHOLOGIQUE",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537702727",
-        "street": "AV HASSAN II. RES. ESSAADA, ENTREE 7",
-        "city": "rabat"
+        "tele": "0535528842",
+        "street": "11 RUE ANTSIRABE",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CABINET D ANATOMIE ET CYTOLOGIE PATHOLOGIQUES",
+        "etablissement": "LABORATOIRE BIOUGNACH",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537771505",
-        "street": "7 RUE OUED SOUSS. AGDAL",
-        "city": "rabat"
+        "tele": "0535521717",
+        "street": "8 RESIDENCE EL KHAOUARIZMY AVENUE PRINCE MOULAY ABDELLAH, RDC",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CBM AL MASSIRA",
+        "etablissement": "LABORATOIRE CHBICHEB",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537793222",
-        "street": "994 BOULEVARD ARMEE ROYALE. PLACE AL MASSIRA. CYM",
-        "city": "rabat"
+        "tele": "0535404526",
+        "street": "RUE HOUCINE BEN ALI. RES ATLAS",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE AGDAL",
+        "etablissement": "LABORATOIRE D ANALYSES ELMAADANI",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537777010",
-        "street": "N 56, 37 ANGLE AVENUE IBN SINA ET AVENUE DE FRANCE, AGDAL",
-        "city": "rabat"
+        "tele": "0535513150",
+        "street": "23 RUE ANTSIRABE",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE DE ",
+        "etablissement": "LABORATOIRE D ANALYSES MEDICALES ELFOUNINI",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537673084",
-        "street": "37 RUE ABOU DERR, AGDAL",
-        "city": "rabat"
+        "tele": "0535524387",
+        "street": "7 PLACE DU MARCHE CENTRAL, AVENUE HASSAN II, 1ER ETAGE",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE LA CAPITALE",
+        "etablissement": "LABORATOIRE D ANALYSES MEDICALES SBAITI",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537230444",
-        "street": "N 17, BLOC JD, AVENUE ESSALAM, HAY EL BARID, YAACOUB MANSOUR",
-        "city": "rabat"
+        "tele": "0535517206",
+        "street": "11 ANGLE AVENUE ALLAL BEN ABDELLAH ET RUE ATLAS",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE PRINCIPAL",
+        "etablissement": "LABORATOIRE D ANANALYSES MEDICALES",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537700012",
-        "street": "213 AVENUE HASSAN II",
-        "city": "rabat"
+        "tele": "0535523003",
+        "street": "BD MOHAMMED V. IMM. KHAMLICH",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE RIAD",
+        "etablissement": "LABORATOIRE DR ELIRAKI",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537710506",
-        "street": "13 ANGLE AVENUE AL MELIA ET RUE MEZIATA",
-        "city": "rabat"
+        "tele": "0535530567",
+        "street": "DAR SMEN 1 DERB ZEMMOURI",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "CENTRE DE BIOLOGIE RIAD ENNAKHIL",
+        "etablissement": "LABORATOIRE EL MENZEH",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537714071",
-        "street": "SECTEUR 11, BLOC Q LOT N 5, ANGLE AV ANNAKHIL ET AV ATTANOUB, HAY RIAD",
-        "city": "rabat"
+        "tele": "0535515008",
+        "street": "BUREAUX PLACE ADMINISTRATIVE, N 26, AVENUE IDRISS II, BUREAU N 7 ET 8, 2EME ETAGE",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "LABORATOIRE AGDAL",
+        "etablissement": "LABORATOIRE GUENOUN D ANATOMIE PATHOLOGIQUE",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537673675",
-        "street": "49 AVENUE ATLAS. AGDAL",
-        "city": "rabat"
+        "tele": "0535516855",
+        "street": "14 AVENUE ALLAL BEN ABDELLAH",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "LABORATOIRE AL FARABI",
+        "etablissement": "LABORATOIRE IBN KHALDOUN",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537730451",
-        "street": "14 AVENUE D ALGER ET RUE AL QUAIRAOUANE, 2EME ETAGE, QUARTIER HASSAN",
-        "city": "rabat"
+        "tele": "0535524748",
+        "street": "10 ROUTE DE FES",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "LABORATOIRE ALABTAL D ANALYSES MEDICALES",
+        "etablissement": "LABORATOIRE ISMAILIA",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537777700",
-        "street": "PLACE ABOU BAKR ESSEDDIK N 2, APPT N 3, AGDAL",
-        "city": "rabat"
+        "tele": "0535452989",
+        "street": "2 AVENUE ENNASR,  DIOUR ESSALAM. IMM 3 ,AL AAILA",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "LABORATOIRE ALAOUI",
+        "etablissement": "LABORATOIRE NEJJAR",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537708558",
-        "street": "13 RUE DE TUNIS",
-        "city": "rabat"
+        "tele": "0535512531",
+        "street": "6 RUE PASTEUR APPT 3, 1 ER ETAGE VILLE NOUVELLE",
+        "city": "MEKNES"
     },
     {
-        "etablissement": "LABORATOIRE ALLAL BEN ABDELLAH",
+        "etablissement": "LABORATOIRE TAFILALET D ANALYSES MEDICALES",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537208080",
-        "street": "135 AVENUE ALLAL BEN ABDELLAH",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE ALWIFAQ",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537777555",
-        "street": "3 AVENUE IBN SINA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BENAMAR",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537262926",
-        "street": "AV HASSAN II, RUE LAOS IMM 10",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BENHASSAIN",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537707100",
-        "street": "4 RUE TIHANA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BIN ELOUIDANE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537772478",
-        "street": "ANGLE AV BENLOUIDANE ET RUE EL GANSRA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BIOCLINIC",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537682525",
-        "street": "64 AVENUE OMAR IBN KHATTAB (ANGLE AVENUE ATLAS)",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BIOFATH D ANALYSES MEDICALES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537292926",
-        "street": "N 108, AMAL 6, 1ER ETAGE, HAY ALFATH, C.Y.M",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BIOSALAM",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537727824",
-        "street": "78 BOULEVARD HASSAN II",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BIR KACEM",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537756858",
-        "street": "AVENUE BIR KACEM",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE BOUAZAOUI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537734390",
-        "street": "46 AVENUE EL MAGHREB EL ARABI",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE CENTRAL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537730318",
-        "street": "21 RESIDENCE MINARET. RUE AMMAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE CITE AMAL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537795018",
-        "street": "56 BLOC D.O. AV AL MASSIRA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES BIOLOGIQUES ET MEDICALES ALMANAL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537280809",
-        "street": "AVENUE AL MASSIRA N 1013, RDC, AMAL 5 CYM",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES BIOLOR",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537636393",
-        "street": "14 AVENUE AHMED REDA GUEDIRA HAY NAHDA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES DAR ESSALAM",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537750600",
-        "street": "AV MOHAMED BEL HASSAN WAZANI ANGLE RUE DRIMA DAR ESSALAM II",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES EL ATLAS",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537297474",
-        "street": "204 AVENUE MOHAMED BEN ABDELLAH, YAACOUB EL MANSOUR",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES LES ALMOHADES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537707015",
-        "street": "5 RUE ZAGORA QUARTIER HASSAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES NAKHLAT RIAD",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537563497",
-        "street": "RESIDENCE CAMELIAS 2, APPT 2, RUE JOULLANAR, HAY RYAD",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES ROSE PARK",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537212525",
-        "street": "7 RUE AL MARINIYINE ANGLE BOULEVARD EL ALAOUIYINE, HASSAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANALYSES MEDICALES YOUSSOUFIA",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0600476022",
-        "street": "BLOC 8, N 13 YOUSSOUFIA OUEST",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANATHOMO PATHOLOGIE AGDAL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537671674",
-        "street": "38 RUE OUKEIMEDEN. AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE D ANATOMIE PATHOLOGIQUE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537673998",
-        "street": "RUE IBN HANBAL, ANGLE NATIONS UNIES",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE DES FACULTES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537773361",
-        "street": "52 AVENUE OMAR IBN KHATTAB AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE DRISSY",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537701026",
-        "street": "6 RUE DERNA. ANGLE AV MLY HASSAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE DU GOLF",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537755257",
-        "street": "AV IMAM MALIK, ROUTE DES ZAERS, KM 7,5",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE DU MAGHREB",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537726693",
-        "street": "5 RUE HUSSEIN 1ER",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE DU MUSEE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "street": "BD MOULAY EL HASSAN ET RUE BENGHAZI RES TARFAYA RC",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE ELATLAS",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537287575",
-        "street": "204 AVENUE SIDI MED BEN ABDELLAH",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE ELWAFAE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537631982",
-        "street": "50 ANGLE AVENUE AL HAOUZ ET RUE OULED HRIZ",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE FATH",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537777886",
-        "street": "4 AVENUE OQBA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE FRAT GENDARMERIE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537674100",
-        "street": "AV IBN SINA, AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE HAJJI D'ANALYSES MEDICALES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537652222",
-        "street": "7  AVENUE EL HAOUZ ET RUE RHAMNA, N 1, TAKEDDOUM",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE HASSOUNI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537298486",
-        "street": "200 AVENUE MED BEN ABDELLAH",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE IBN NAFISS",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537671795",
-        "street": "8 AVENUE IBN ROCHD",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE IBN ROCHD D ANALYSES MEDICALES ",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537651046",
-        "street": "ANGLE AVENUE AL HAOUZ ET RUE RHAMNA, RDC, QUARTIER YOUSSOUFIA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE IBN SINA",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537681838",
-        "street": "39 AVENUE IBN SINA. AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE IMMCELL D'ANALYSES DE BIOLOGIE MEDICALE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0694261449",
-        "street": "55 AVENUE IBN SINA, AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE LA RESIDENCE D ANALYSES MEDICALES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537765190",
-        "street": "10 RUE DE TANGER HASSAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE LE CLARIDGE",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537654008",
-        "street": "RUE AHMED RIFAI. COMPLEXE LE CLARIDGE. SOUISSI",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE LEBBAR",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537724465",
-        "street": "3 AVENUE PRINCE MOULAY ABDELLAH",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE LOUALI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537670909",
-        "street": "102 AVENUE FAL OULD OUMEIR. AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE MAMOUNIA",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537722424",
-        "street": "AV HASSAN II. RES. MAMOUNIA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE NAKHIL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537631224",
-        "street": "115 AVENUE HOUMANE FETOUAKI. AVIATION",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE NSIRI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537672262",
-        "street": "107 AVENUE FAL OULD OUMEIR. AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE POLYLAB",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537756858",
-        "street": "AV BIR KASSEM. SOUISSI",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE PROFESSEUR ALAOUI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537752233",
-        "street": "21 RUE ZYAYDAH, AVIATION",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE SAHEL",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537672234",
-        "street": "84 ANGLE AVENUE FAL OULD OUMEIR ET RUE OUKAYMEDEN, 2EME ETAGE, AGDAL",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE SENTISSI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537735222",
-        "street": "AV HASSAN II. IMM G, RES. REDA",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE SLIMANI",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537766464",
-        "street": "3 RUE ANNABA. HASSAN",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "LABORATOIRE TAZI D ANALYSES MEDICALES",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537767630",
-        "street": "RES KEBIBAT 2, ANGLE AVENUE KEBIBAT ET RUE AL HIND",
-        "city": "rabat"
+        "tele": "0535525162",
+        "street": "1 RUE MELLILIA AVENUE NEHROU RESIDENCE ATLAS",
+        "city": "MEKNES"
     },
     {
         "etablissement": "LABORATOIRE ZITOUNE",
         "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537711991",
-        "street": "6 RUE AL KARM. SECTEUR 3. HAY RYAD",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "MEDILAB",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537703930",
-        "street": "ANGLE RUES AL KAHIRA ET GHANDI",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "POLYBIO",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537777083",
-        "street": "7 RUE OUED SOUSS",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "PRECILAB",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537735717",
-        "street": "2 RUE DU CAIRE ANGLE AV MED V",
-        "city": "rabat"
-    },
-    {
-        "etablissement": "SANTE LAB",
-        "activite": "LABORATOIRES D ANALYSES",
-        "tele": "0537760148",
-        "street": "73 RUE PATRICE LUMUMBA",
-        "city": "rabat"
+        "tele": "0535451339",
+        "street": "93 AVENUE MED BEN AHMED EDIGHOUSSI. ZITOUNE. BP  11168",
+        "city": "MEKNES"
     }
 ]

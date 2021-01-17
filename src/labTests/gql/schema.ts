@@ -80,6 +80,7 @@ export const LabTestsSchema = buildSchema(`
         fetchTwentyLabTests_fr : [FrTest]
         LabTestView_en( name : LabTestsNames ) : FrTest
         LabTestView_fr( name : String ) : FrTest
+        LabTestFrViewByAbbr( abbr : String ) : FrTest
         LabTestFrenchSearch( query : String) : [FrTest]
         LabTestFrenchById (id : String ) : FrTest
         LabTestFrenchByIds (ids : [String] ) : [FrTest]

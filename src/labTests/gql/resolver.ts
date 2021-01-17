@@ -10,6 +10,7 @@ export const LabTestsResolver = {
     fetchTwentyLabTests_fr: labTests.fetchTwentyLabTests_fr,
     LabTestView_en: labTests.LabTestView,
     LabTestView_fr: labTests.LabTestFrView,
+    LabTestFrViewByAbbr: labTests.LabTestFrViewByAbbr,
     LabTestFrenchSearch: labTests.LabTestsFrFilterByNameAndMnemonic,
     LabTestNamesUpdate : labTests.namesUpdate,
     LabTestReferenceUpdate : labTests.referenceUpdate,

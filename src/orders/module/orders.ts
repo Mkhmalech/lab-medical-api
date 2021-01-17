@@ -6,6 +6,7 @@ interface iOrder {
     
     OrderUniqueCode : string
     OrderedBy : string
+    OrderType : string
     OrderDate : string
     OrderTime : string
     OrderPriceTotal : number
@@ -48,14 +49,7 @@ export const LabOrder = new Schema({
     OrderTime : String,
     OrderPriceTotal : Number,
     OrderStatus : [LabOrderStatus],
-    patient : {
-        civility : String,
-        firstname : String,
-        lastname : String,
-        birthday : String,
-        documentIDNumber : String,
-        documentIDType : String,
-    },
+    patient : { type: Schema.Types.ObjectId, ref: 'PATIENT' },
     laboratory : { type: Schema.Types.ObjectId, ref: 'LABO' },
     referredFrom : { type: Schema.Types.ObjectId, ref: 'LABO' },
     referredFromCabinet : { type: Schema.Types.ObjectId, ref: 'CABINET' },
@@ -63,4 +57,4 @@ export const LabOrder = new Schema({
     panel : [LabOrderPanel]
 })
 
-export const LABORDER = model<LabOrderModel>('LABORDER', LabOrder)
+export const ORDER = model<LabOrderModel>('ORDER', LabOrder)

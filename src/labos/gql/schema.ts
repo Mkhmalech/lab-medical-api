@@ -70,7 +70,8 @@ export const LaboSchema = buildSchema(`
         LaboListByCity(city : String) : [LaboInfo]
         LaboListTwentyByCity(city : String) : [LaboInfo]
         LaboDetails(name : String) : LaboInfo
-        searchLaboByName(query : String) : [Account]
+        fetchLaboById(id : String) : LaboInfo
+        searchLaboByName(query : String) : [LaboInfo]
         team : LaboTeamQuery
     }
 
@@ -86,6 +87,7 @@ export const LaboSchema = buildSchema(`
             street : String,
             city : String
         ) : String
+        LaboDeleteRepeatedAccount : String
     }
 
     schema {

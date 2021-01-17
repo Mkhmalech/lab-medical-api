@@ -1,5 +1,5 @@
 import { TESTS } from "../module/labtests";
-import { userFunc } from "../../../../user-medical-api/src";
+import { userFunc } from "../../../../../user-medical-api/src";
 
 export class LabTests {
   //Methods
@@ -82,6 +82,29 @@ export class LabTests {
     const test = await TESTS.findOne({ "name.fr": name });
     if (!test) throw new Error("no test found");
 
+    return {
+      id: test._id.toString(),
+      name: {
+        en: test.name.en,
+        fr: test.name.fr
+      },
+      reference: { ...test.reference },
+      finance: [
+        {
+          Bcode: test.finance[0] ? test.finance[0].Bcode : null,
+          country: test.finance[0] ? test.finance[0].country : null
+        }
+      ],
+      specimen : {...test.specimen}
+    };
+  };
+  /**
+   * fetch test by abbr
+   * @param param0 
+   */
+  LabTestFrViewByAbbr = async ({ abbr }: any) => {
+    const test = await TESTS.findOne({ "reference.Mnemonic": abbr });
+    if (!test) throw new Error("no test found");
     return {
       id: test._id.toString(),
       name: {

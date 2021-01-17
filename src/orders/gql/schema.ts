@@ -10,7 +10,7 @@ const OrderTime = `OrderTime : String`
 const civility = `civility : String`
 const firstname = `firstname : String`
 const lastname = `lastname : String`
-const birthday = `birthday : String`
+const DOB = `DOB : String`
 const documentIDNumber = `documentIDNumber : String`
 const documentIDType = `documentIDType : String`
 const laboId = `laboId : ID`
@@ -26,7 +26,7 @@ const patient = `{
     ${civility}
     ${firstname}
     ${lastname}
-    ${birthday}
+    ${DOB}
     ${documentIDNumber}
     ${documentIDType}
 }`
@@ -97,7 +97,9 @@ export const labOrdersSchema = buildSchema(`
 
     type orderMut {
         insertOrder(order : OrderInput, patient : patienInput) : String
-        insertCabinetOrder(order : OrderInput, patient : patienInput) : String
+        insertCabinetOrder(
+            order : OrderInput, patientId : String, payement : Float 
+        ) : String
         referredOrdersDetails(orderId : String) : OrderDetails 
         referredOrdersChangeStatus(UOC : String, type : String) : NewStatus
     }

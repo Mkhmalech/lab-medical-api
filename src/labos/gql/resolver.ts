@@ -56,6 +56,8 @@ export const LaboResolver = {
 
   LaboDetails: labo.getLaboByName,
 
+  fetchLaboById: labo.fetchLaboById,
+
   addNewAccountLab: labo.addNewAccountLab,
 
   searchLaboByName: labo.searchLaboByName,
@@ -63,4 +65,6 @@ export const LaboResolver = {
   LaboUpdateAddress : labo.LaboUpdateAddress,
 
   LaboAddNewLabos : labo.LaboAddNewLabos,
+
+  LaboDeleteRepeatedAccount : labo.LaboDeleteRepeatedAccount,
 };
