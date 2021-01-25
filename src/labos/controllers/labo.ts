@@ -562,7 +562,7 @@ export class Labo {
       return message;
     } else {
       if (hasAuthorization(user, accountName)) {
-        LABO.findOne({ "account.name": accountName }, (e, r) => {
+        LABO.findOne({ "account.name": accountName }, (e:any, r:any) => {
           if (e) throw new Error(e)
           if (!r) throw new Error("account_not_founded")
           cb(r)
@@ -600,7 +600,7 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
 
           let newRole: any = {};
 
@@ -614,7 +614,7 @@ export class Labo {
 
           if (r) {
             r.setting.team.push(newRole);
-            r.save(e => {
+            r.save((e :any)=> {
               if (e) throw new Error(e);
               else console.log("saved")
             })
@@ -647,15 +647,15 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
           if (r) {
-            const index = r.setting.team.findIndex(t => t.role = args.role);
+            const index = r.setting.team.findIndex((t:any)=> t.role = args.role);
 
             if (index > -1) {
               r.setting.team.splice(index, 1);
             }
 
-            r.save(e => {
+            r.save((e:any)=> {
               if (e) throw new Error(e);
               else console.log("saved")
             })
@@ -683,11 +683,11 @@ export class Labo {
     const { role, permissions } = args;
     if (hasAuthorization(user)) {
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e, r) => {
+        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
 
           if (r) {
             // find role
-            r.setting.team.map(r => {
+            r.setting.team.map((r:any )=> {
               if (r.role === role) {
                 r.permissions.map((p: any) => {
                   permissions.map((u: any) => {
