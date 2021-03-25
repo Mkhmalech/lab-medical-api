@@ -20,7 +20,7 @@ export const LabTestsResolver = {
     LabTestAllUpdate : labTests.updateAll,
     LabTestFrenchById : labTests.LabTestFrenchById,
     LabTestFrenchByIds : labTests.LabTestFrenchByIds,
-    nameEnFilter : labTests.nameEnFilter
-    
+    nameEnFilter : labTests.nameEnFilter,
+    createTestsSiteMap : labTests.createTestsSiteMap,
 
 }

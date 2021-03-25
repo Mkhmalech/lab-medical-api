@@ -100,7 +100,8 @@ export const LabTestsSchema = buildSchema(`
             finance : LabTestsFinance,
             preAnalytics : LabTestPreAnalytics,
             user : User 
-        ) : Boolean        
+        ) : Boolean 
+        createTestsSiteMap : String      
     }
 
     schema {

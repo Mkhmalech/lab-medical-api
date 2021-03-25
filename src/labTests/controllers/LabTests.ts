@@ -1,6 +1,6 @@
 import { TESTS } from "../module/labtests";
 import { userFunc } from "../../../../../user-medical-api/src";
-
+const fs = require('fs');
 export class LabTests {
   //Methods
 
@@ -393,5 +393,23 @@ export class LabTests {
     res.map(test=>result.push(test));
 
     return([...result])
+  }
+  createTestsSiteMap = async () => {
+    let sitmap: string = '';
+  
+    const res = await TESTS.find({ "name.fr": { $exists: true } }).then((n: any) => {
+        if (n) {
+            n.map((m: any) => {
+                sitmap += `<url><loc>https://ittyni.com/actes-tarifs/nomenclature-actes-biologie-médicale/${m.reference.Mnemonic}</loc><lastmod>${new Date().toISOString()}</lastmod><priority>0.80</priority></url>`;
+            })
+        }
+    })
+  
+    // console.log(sitmap)
+  
+    fs.writeFileSync(`./testSitemap.xml`, sitmap, (err:any, doc:any) => {
+        if (err) throw err
+        console.log(doc)
+    });
   }
 }
