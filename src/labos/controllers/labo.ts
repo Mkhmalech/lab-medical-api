@@ -1,6 +1,5 @@
 import { LABO } from "../module/labo";
-import { autoIncLabos } from "../../../../../code-ittyni-api/src/controller/code";
-import { Db } from "../../../../../db-ittyni-api/src/db";
+import { Db } from "../../../../../common/db";
 
 import labdata from './laboData.json'
 
@@ -17,7 +16,7 @@ export class Labo {
   }
   // update labo address 
   fetchLaboById = async ({ id }: any) => {
-    const res: any = await LABO.findById(id).select('account contact');
+    const res: any = await LABO.findByIdAndUpdate(id, { $inc: { 'views': 1 } }).select('account contact views');
     if (!res) return "no_result_founded";
     else return res;
   }
@@ -33,8 +32,8 @@ export class Labo {
     })
   }
   // delete repeated account
-  LaboDeleteRepeatedAccount = ()=>{
-    LABO.find({"contact.address.city" : "meknes"}).remove().exec(e=>console.log(e));
+  LaboDeleteRepeatedAccount = () => {
+    LABO.find({ "contact.address.city": "meknes" }).remove().exec(e => console.log(e));
   }
   // update labo address 
   LaboAddNewLabos = () => {
@@ -52,13 +51,13 @@ export class Labo {
   }
   // Labo Info
   LaboListAll = () => {
-    const labos: any = this.Labo.getAllFields();
+    const labos: any = this.Labo.getAllDocs();
     return labos;
   };
   // Labo Info
   LaboListTwentyByCity = async ({ city }: any) => {
     const labos: any = await LABO.find({ 'contact.address.city': city })
-      .select('account contact')
+      .select('account contact views')
       .then((labs: any) => {
         let newLabs = [...labs]
         newLabs = newLabs.slice(0, 20).map(() =>
@@ -70,13 +69,13 @@ export class Labo {
   };
   // Labo Info
   LaboListByCity = async ({ city }: any) => {
-    const labos: any = await LABO.find({ 'contact.address.city': city }).select('account contact');
+    const labos: any = await LABO.find({ 'contact.address.city': city }).select('account contact views');
     return (labos);
   };
 
   // labo details
   getLaboByName = ({ name }: any) => {
-    const labo = this.Labo.getOneByQuery({ "account.name": new RegExp(name,'ig') });
+    const labo = this.Labo.getOneByQuery({ "account.name": new RegExp(name, 'ig') });
     return labo;
   };
   // search labo by name
@@ -401,10 +400,6 @@ export class Labo {
 
         newLab.account.name = labos[i].name;
 
-        let code: number = await autoIncLabos();
-
-        newLab.account.code = code;
-
         newLab.contact.tele.fix.push(labos[i].Fix);
 
         var fax: string | undefined;
@@ -422,7 +417,7 @@ export class Labo {
         //   console.log(newLab);
       }
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
     }
   }
 
@@ -562,7 +557,7 @@ export class Labo {
       return message;
     } else {
       if (hasAuthorization(user, accountName)) {
-        LABO.findOne({ "account.name": accountName }, (e:any, r:any) => {
+        LABO.findOne({ "account.name": accountName }, (e: any, r: any) => {
           if (e) throw new Error(e)
           if (!r) throw new Error("account_not_founded")
           cb(r)
@@ -600,11 +595,11 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
+        LABO.findOne({ "account.name": req.accountName }, (e: any, r: any) => {
 
           let newRole: any = {};
 
-          newRole.addedby = user.userId
+          newRole.addedby = user._id
           newRole.role = args.status
           newRole.permissions = [
             { componentName: "catalogue", create: false, read: false, update: false, delete: false },
@@ -614,7 +609,7 @@ export class Labo {
 
           if (r) {
             r.setting.team.push(newRole);
-            r.save((e :any)=> {
+            r.save((e: any) => {
               if (e) throw new Error(e);
               else console.log("saved")
             })
@@ -647,15 +642,15 @@ export class Labo {
     if (hasAuthorization(user)) {
 
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
+        LABO.findOne({ "account.name": req.accountName }, (e: any, r: any) => {
           if (r) {
-            const index = r.setting.team.findIndex((t:any)=> t.role = args.role);
+            const index = r.setting.team.findIndex((t: any) => t.role = args.role);
 
             if (index > -1) {
               r.setting.team.splice(index, 1);
             }
 
-            r.save((e:any)=> {
+            r.save((e: any) => {
               if (e) throw new Error(e);
               else console.log("saved")
             })
@@ -683,11 +678,11 @@ export class Labo {
     const { role, permissions } = args;
     if (hasAuthorization(user)) {
       try {
-        LABO.findOne({ "account.name": req.accountName }, (e:any, r:any) => {
+        LABO.findOne({ "account.name": req.accountName }, (e: any, r: any) => {
 
           if (r) {
             // find role
-            r.setting.team.map((r:any )=> {
+            r.setting.team.map((r: any) => {
               if (r.role === role) {
                 r.permissions.map((p: any) => {
                   permissions.map((u: any) => {
@@ -768,7 +763,7 @@ export class Labo {
       if (r) {
         let Catalog = {
           ...args,
-          createdBy: user.userId,
+          createdBy: user._id,
         }
         if (Catalog.addressedTo == "SubContractor") delete Catalog.addressedToId
         if (Catalog.addressedTo == "Contributor") {
@@ -917,5 +912,27 @@ export class Labo {
       else return "catalog_not_founded"
     } else return "lab_account_not_founded"
   }
+  // activate modules
+  activateModules = ({ componentId, accountId, accountType }: any, { user }: any) => {
+    user.supadmin(user, (_id: any) => {
+      const labo = new Db(LABO);
 
+      labo.getDocByIdAndPushSubDoc(accountId, {
+        extensions: {
+          component: componentId,
+          activatedBy: _id
+        }
+      })
+
+      return "account_updated_successfully"
+    })
+
+  }
+
+  LaboFetchComponents = async ({ accountId }: any, { user }: any) => user.supadmin(
+    user, async (_id: any) => {
+      const labo = new Db(LABO);
+      const modules = await labo.getSubDocWithPop(accountId, 'extensions', 'extensions.component');
+      return modules.map((m: any) => m.component);
+    })
 }

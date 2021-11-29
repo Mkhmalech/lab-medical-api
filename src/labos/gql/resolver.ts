@@ -67,4 +67,8 @@ export const LaboResolver = {
   LaboAddNewLabos : labo.LaboAddNewLabos,
 
   LaboDeleteRepeatedAccount : labo.LaboDeleteRepeatedAccount,
+
+  activateModules : labo.activateModules,
+
+  LaboFetchComponents : labo.LaboFetchComponents,
 };

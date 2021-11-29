@@ -1,6 +1,6 @@
-import { PATIENT } from "../../../../../extensions/patient_record/src/module/patient";
-import { PAYEMENT } from "../../../../../extensions/payement_manager/src/module/payement";
-import { CABINET } from "../../../../cabinet-medical-api/src/module/cabinets";
+import { PATIENT } from "../../../../patient_record/src/module/patient";
+import { PAYEMENT } from "../../../../payement_manager/src/module/payement";
+import { CABINET } from "../../../../cabinet-manager/src/module/cabinets";
 import { LABO } from "../../labos/module/labo";
 import { TESTS } from "../../labTests/module/labtests";
 import { ORDER } from '../module/orders'
@@ -16,7 +16,7 @@ export const insertOrder = async ({ order, patient }: any, { user }: any) => {
     let newOrder = new ORDER({
         OrderUniqueCode: UOC,
         OrderType: "referral",
-        OrderedBy: user.userId,
+        OrderedBy: user._id,
         OrderDate: new Date().toLocaleDateString(),
         OrderTime: new Date().toLocaleTimeString(),
         OrderPriceTotal: order.OrderPriceTotal,
@@ -29,7 +29,7 @@ export const insertOrder = async ({ order, patient }: any, { user }: any) => {
     newOrder.OrderStatus.push({
         type: "created",
         createdAt: new Date().toLocaleString(),
-        createdBy: user.userId
+        createdBy: user._id
     })
 
     const res = await newOrder.save();
@@ -58,7 +58,7 @@ export const insertCabinetOrder = async ({ order, patientId, payement }: any, { 
     let newOrder = new ORDER({
         OrderUniqueCode: UOC,
         OrderType: "referral",
-        OrderedBy: user.userId,
+        OrderedBy: user._id,
         OrderDate: new Date().toLocaleDateString(),
         OrderTime: new Date().toLocaleTimeString(),
         OrderPriceTotal: order.OrderPriceTotal,
@@ -71,7 +71,7 @@ export const insertCabinetOrder = async ({ order, patientId, payement }: any, { 
     newOrder.OrderStatus.push({
         type: "created",
         createdAt: new Date().toLocaleString(),
-        createdBy: user.userId
+        createdBy: user._id
     })
 
     const res = await newOrder.save();
@@ -79,7 +79,7 @@ export const insertCabinetOrder = async ({ order, patientId, payement }: any, { 
     // await validation of the payement
     let newPayement = new PAYEMENT({
         createdAt: new Date().toISOString(),
-        createdBy: user.userId,
+        createdBy: user._id,
         orderCode: res.OrderUniqueCode,
         orderId: res._id,
         amount: payement,
@@ -187,7 +187,7 @@ export const referredOrdersChangeStatus = async (args: any, { user }: any) => {
                 status.OrderStatus.push({
                     type: args.type,
                     createdAt: new Date().toLocaleString(),
-                    createdBy: user.userId
+                    createdBy: user._id
                 })
                 const res = await status.save();
                 if (res) return res.OrderStatus[res.OrderStatus.length - 1]

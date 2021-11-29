@@ -6,6 +6,8 @@ import * as settings from "./settings";
 
 type LaboModel = ILabo & Document;
 
+// queuing desks
+
 const LaboCatalogListUpdateSchema = new Schema({
   userID: { type: Schema.Types.ObjectId, ref: 'USER' },
   testReported: Number,
@@ -80,7 +82,10 @@ const LaboSchema = new Schema({
       },
     },
   },
-
+  /**
+   * number of views
+   */
+  views : Number,
   /**
    * price for contributors, pros
    * and affiliates
@@ -153,7 +158,12 @@ const LaboSchema = new Schema({
   /**
    * clients appointement
   */
-  appointements : [Appointement]
+  appointements : [Appointement],
+  /**
+   * queuing system
+  */
+  queuing : [{ type: Schema.Types.ObjectId, ref: "QUEUING" }],
+
 });
 
 export const LABO = model<LaboModel>("LABO", LaboSchema);

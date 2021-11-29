@@ -1,4 +1,4 @@
-import { CABINET } from "../../../../../health-provider/cabinet-medical-api/src/module/cabinets";
+import { CABINET } from "../../../../../extensions/cabinet-manager/src/module/cabinets";
 import { LABO } from "../../labos/module/labo";
 import { TESTS } from "../../labTests/module/labtests";
 

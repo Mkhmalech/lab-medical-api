@@ -12,15 +12,33 @@ export const LabTestsResolver = {
     LabTestView_fr: labTests.LabTestFrView,
     LabTestFrViewByAbbr: labTests.LabTestFrViewByAbbr,
     LabTestFrenchSearch: labTests.LabTestsFrFilterByNameAndMnemonic,
+    LabTestFrenchById : labTests.LabTestFrenchById,
+    LabTestFrenchByIds : labTests.LabTestFrenchByIds,
+    nameEnFilter : labTests.nameEnFilter,
+    createTestsSiteMap : labTests.createTestsSiteMap,
+    fetchTestsByFirstLetter : labTests.fetchTestsByFirstLetter,
+
+    // update a test
     LabTestNamesUpdate : labTests.namesUpdate,
     LabTestReferenceUpdate : labTests.referenceUpdate,
     LabTestFinanceUpdate : labTests.financeUpdate,
     LabTestClassificationUpdate : labTests.classificationUpdate,
     LabTestSpecimenUpdate : labTests.specimenUpdate,
     LabTestAllUpdate : labTests.updateAll,
-    LabTestFrenchById : labTests.LabTestFrenchById,
-    LabTestFrenchByIds : labTests.LabTestFrenchByIds,
-    nameEnFilter : labTests.nameEnFilter,
-    createTestsSiteMap : labTests.createTestsSiteMap,
+    
+    // fetch updates
+    fetchUpdates : labTests.fetchUpdates,
+    fetchUpdateById : labTests.fetchUpdateById,
+
+    // modify updates
+    modifyUpdate : labTests.modifyUpdate,
+    modifyUpdateNames : labTests.modifyUpdateNames,
+    modifyUpdateReference : labTests.modifyUpdateReference,
+    modifyUpdateSpecimen : labTests.modifyUpdateSpecimen,
+    modifyUpdateFinance : labTests.modifyUpdateFinance,
+
+    // laboratory departements 
+    addDepartment : labTests.addDepartment,
+    fetchDepartments : labTests.fetchDepartments,
 
 }

@@ -1,6 +1,14 @@
 import { buildSchema } from 'graphql';
 import { Setting, LaboCatalog, departement, LaboTeam, LaboTeamQuery } from './schema/'
-
+// global
+const id = `_id : ID`
+const name = 'name:String'
+// extension
+const componentId = 'componentId : ID'
+const componentName = 'componentName : ID'
+const component = `type Component { ${id} ${name}}`
+const accountId = 'accountId : ID'
+const accountType = 'accountType : String'
 const Tele =`
     type Tele {
         fix : [String]
@@ -39,6 +47,7 @@ const Labo = `
         _id : ID
         account : Account
         contact : Contact
+        views : Int
     }
     type Labo {
         LaboInfoListAll : [LaboInfo]
@@ -53,6 +62,8 @@ const Labo = `
 `
 
 export const LaboSchema = buildSchema(`
+
+    ${component}
 
     ${LaboCatalog}    
 
@@ -73,6 +84,7 @@ export const LaboSchema = buildSchema(`
         fetchLaboById(id : String) : LaboInfo
         searchLaboByName(query : String) : [LaboInfo]
         team : LaboTeamQuery
+        LaboFetchComponents(${accountId}) : [Component]
     }
 
     type laboMutation {
@@ -88,6 +100,7 @@ export const LaboSchema = buildSchema(`
             city : String
         ) : String
         LaboDeleteRepeatedAccount : String
+        activateModules(${componentId}, ${accountId}, ${accountType}) : String
     }
 
     schema {

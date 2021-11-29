@@ -151,6 +151,7 @@ interface LabLaboCertification {}
 interface ILabo {
   account: LabLaboAccount;
   contact: LabLaboContact;
+  views : number;
   catalogs: any[];
   order: LabLaboOrder;
   referral: LabLaboReferral;

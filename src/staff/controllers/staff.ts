@@ -17,7 +17,7 @@ class Staff extends Labo {
       return message;
     } else {
       if (hasAuthorization(user, accountName)) {
-        LABO.findOne({ "account.name": accountName }, (e, r) => {
+        LABO.findOne({ "account.name": accountName }, (e:any, r:any) => {
           if (e) throw new Error(e);
           if (!r) throw new Error("account_not_founded");
           cb(r);
@@ -83,7 +83,7 @@ class Staff extends Labo {
     const { employer } = args;
     try {
       const res = await this.addPersonal(req.accountName, req, (r) => {
-        employer.addedBy = req.user.userId;
+        employer.addedBy = req.user._id;
 
         // check if departement set or not
         if (employer.departementName) {
@@ -104,7 +104,7 @@ class Staff extends Labo {
         return "success";
       }
     } catch (e) {
-      return new Error(e);
+      return Error(`${e}`);
     }
   };
   /**
@@ -114,7 +114,7 @@ class Staff extends Labo {
     let contributor : any = {cabinetId : id}
     try {
       const res = await this.addPersonal(req.accountName, req, (r) => {
-        contributor.addedBy = req.user.userId;
+        contributor.addedBy = req.user._id;
 
         contributor.createdAt = new Date().toString();
 
@@ -127,7 +127,7 @@ class Staff extends Labo {
         return "success";
       }
     } catch (e) {
-      return new Error(e);
+      return new Error(`${e}`);
     }
   };
   /**
@@ -144,10 +144,10 @@ class Staff extends Labo {
    */
   employerDelete = (args: any) => {
     try {
-      LABO.findOne({ "account.name": "Centrale du CHU Hassan II" }, async (e, r) => {
+      LABO.findOne({ "account.name": "Centrale du CHU Hassan II" }, async (e:any, r:any) => {
         if (e) throw new Error(e);
         if (r) {
-          const i = await r.staff.findIndex((s) => s._id == args.id);
+          const i = await r.staff.findIndex((s:any) => s._id == args.id);
           if (i < 0) return "shift_not_founded"
           r.staff.splice(i, 1);
           r.save();
@@ -156,7 +156,7 @@ class Staff extends Labo {
       });
       return 'success';
     } catch (e) {
-      throw new Error(e);
+      throw new Error(`${e}`);
     }
   }
   /**
@@ -181,7 +181,7 @@ class Staff extends Labo {
       const res = await this.addPersonal(args.accountName, req, (r) => {
         r.shifts.push({
           employerId: args.userId,
-          addedBy: req.user.userId || "",
+          addedBy: req.user._id || "",
           departementId: args.departementId,
           mounth: args.mounth,
           year: args.year,
@@ -237,10 +237,10 @@ class Staff extends Labo {
    */
   deleteShift = async (args: any, req : any) => {
     try {
-      LABO.findOne({ "account.name": req.accountName }, async (e, r) => {
+      LABO.findOne({ "account.name": req.accountName }, async (e:any, r:any) => {
         if (e) throw new Error(e);
         if (r) {
-          const i = await r.shifts.findIndex((s) => s._id == args.id);
+          const i = await r.shifts.findIndex((s:any) => s._id == args.id);
           if (i < 0) return "shift_not_founded"
           r.shifts.splice(i, 1);
           r.save();
@@ -249,7 +249,7 @@ class Staff extends Labo {
       });
       return 'success';
     } catch (e) {
-      throw new Error(e);
+      throw new Error(`${e}`);
     }
   };
 
