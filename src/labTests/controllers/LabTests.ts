@@ -387,7 +387,7 @@ export class LabTests {
     if (!test) return false;
 
 
-    if (user && user.role && user.role === 'supadmin') {
+    if (user && user.role && user.role.name === 'supadmin') {
       const isExist = test.finance.findIndex(o => o.country === finance.country);
       if (test.finance[isExist]) {
         test.finance[isExist].Bcode = finance.Bcode;
