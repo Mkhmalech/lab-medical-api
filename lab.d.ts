@@ -168,5 +168,6 @@ interface ILabo {
   },
   staff : any[],
   contributors : any[],
-  extensions : any[]
+  extensions : any[],
+  queuings : any[]
 }

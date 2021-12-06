@@ -162,7 +162,7 @@ const LaboSchema = new Schema({
   /**
    * queuing system
   */
-  queuing : [{ type: Schema.Types.ObjectId, ref: "QUEUING" }],
+  queuings : [{ type: Schema.Types.ObjectId, ref: "QUEUING" }],
 
 });
 
